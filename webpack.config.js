@@ -15,6 +15,12 @@ const config = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
+    alias: {
+      '@env.js': resolve(__dirname, 'env.js'),
+      '@common': resolve(__dirname, 'src/common'),
+      '@layouts': resolve(__dirname, 'src/layouts'),
+      '@services': resolve(__dirname, 'src/services'),
+    }
   },
   module: {
     rules: [
