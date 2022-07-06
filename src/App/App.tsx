@@ -5,7 +5,7 @@ import MainContent from '@layouts/MainContent';
 
 const App: React.FC = () => {
   return (
-    <div>
+    <div className="flex h-screen">
       <LeftSidebar />
       <MainContent />
     </div>
