@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+import env from '@env.js';
+
 const getAll = async (): Promise<void> => {
   try {
-    const response = await axios.get('http://localhost:3000/projects');
+    const response = await axios.get(`${env.api.url}/projects`);
     return response.data;
   } catch(error) {
     console.log('GetAllProjectsError', error);
