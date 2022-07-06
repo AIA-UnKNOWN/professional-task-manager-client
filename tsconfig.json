@@ -9,7 +9,14 @@
     "allowJs": true,
     "skipLibCheck": true,
     "isolatedModules": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "@env.js": ["../env.js"],
+      "@common/*": ["common/*"],
+      "@layouts/*": ["layouts/*"],
+      "@services/*": ["services/*"]
+    }
   },
   "include": ["src"]
 }
