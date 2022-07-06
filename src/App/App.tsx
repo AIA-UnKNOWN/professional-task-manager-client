@@ -1,9 +1,13 @@
 import React from 'react';
 
+import LeftSidebar from '@layouts/LeftSidebar';
+import MainContent from '@layouts/MainContent';
+
 const App: React.FC = () => {
   return (
     <div>
-      <h1>Professional Task Manager</h1>
+      <LeftSidebar />
+      <MainContent />
     </div>
   );
 }
