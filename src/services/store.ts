@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 
 import projects from './reducers/projects';
+import labels from './reducers/labels';
 
 const store = configureStore({
   reducer: {
     projects,
+    labels,
   }
 });
 
