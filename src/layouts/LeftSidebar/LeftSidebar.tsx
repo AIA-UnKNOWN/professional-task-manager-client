@@ -3,6 +3,7 @@ import React from 'react';
 import useLeftSidebar from './LeftSidebar.hook';
 import Container from '@common/Container';
 import Projects from './components/Projects';
+import Labels from './components/Labels';
 
 const LeftSidebar: React.FC = () => {
   useLeftSidebar();
@@ -19,6 +20,18 @@ const LeftSidebar: React.FC = () => {
         }}
       >
         <Projects />
+      </Container>
+      <Container
+        style={{
+          width: 266,
+          padding: 10,
+          paddingLeft: 25,
+          paddingRight: 25,
+          backgroundColor: 'white',
+          marginTop: 20,
+        }}
+      >
+        <Labels />
       </Container>
     </div>
   );
