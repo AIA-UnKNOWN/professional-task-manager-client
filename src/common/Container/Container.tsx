@@ -2,15 +2,17 @@ import React from 'react';
 
 const Container: React.FC<{
   children: JSX.Element[] | JSX.Element,
-  style: React.CSSProperties | undefined,
+  style?: React.CSSProperties | undefined,
+  className?: string,
 }> = ({
   children,
-  style
+  style,
+  className,
 }) => {
   return (
     <div
-      className="rounded-[20px]"
-      style={style}
+      className={`rounded-[20px] ${className}`}
+      style={style ? style : {}}
     >
       {children}
     </div>
