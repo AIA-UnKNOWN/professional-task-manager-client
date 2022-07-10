@@ -1,36 +1,16 @@
 import React from 'react';
 
-import useLeftSidebar from './LeftSidebar.hook';
 import Container from '@common/Container';
 import Projects from './components/Projects';
 import Labels from './components/Labels';
 
 const LeftSidebar: React.FC = () => {
-  useLeftSidebar();
-
   return (
     <div className="bg-light-gray w-[300px] flex flex-col items-center py-5">
-      <Container
-        style={{
-          width: 266,
-          padding: 10,
-          paddingLeft: 25,
-          paddingRight: 25,
-          backgroundColor: 'white'
-        }}
-      >
+      <Container className="bg-white w-[266px] py-[10px] px-[25px]">
         <Projects />
       </Container>
-      <Container
-        style={{
-          width: 266,
-          padding: 10,
-          paddingLeft: 25,
-          paddingRight: 25,
-          backgroundColor: 'white',
-          marginTop: 20,
-        }}
-      >
+      <Container className="bg-white w-[266px] py-[10px] px-[25px] mt-5">
         <Labels />
       </Container>
     </div>
