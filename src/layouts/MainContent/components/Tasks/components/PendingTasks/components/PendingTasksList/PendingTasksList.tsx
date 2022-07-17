@@ -4,22 +4,17 @@ import usePendingTasksList from './PendingTasksList.hook';
 import Task from '@layouts/MainContent/components/Tasks/components/Task';
 
 const PendingTasksList: React.FC = () => {
-  usePendingTasksList();
+  const { tasks } = usePendingTasksList();
 
   return (
     <div className="mt-5">
-      <Task
-        isCompleted
-        title="Task 1"
-      />
-      <Task
-        isCompleted
-        title="Task 2"
-      />
-      <Task
-        isCompleted={false}
-        title="Task 3"
-      />
+      {tasks.map(task => (
+        <Task
+          key={task.id}
+          isCompleted={task.is_completed}
+          title={task.title}
+        />
+      ))}
     </div>
   );
 }
