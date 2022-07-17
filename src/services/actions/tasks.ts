@@ -5,7 +5,7 @@ import env from '@env.js';
 const getAll = async (projectId: number): Promise<void> => {
   try {
     const response = await axios.get(`${env.api.url}/tasks`, {
-      params: { project_id: projectId }
+      params: { projectId }
     });
     return response.data;
   } catch(error) {
