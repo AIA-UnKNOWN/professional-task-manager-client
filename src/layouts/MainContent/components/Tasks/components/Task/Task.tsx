@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { FaCheckCircle, FaRegCheckCircle, FaAngleDown } from 'react-icons/fa';
+import { FaAngleDown } from 'react-icons/fa';
 
 import Container from '@common/Container';
 import TaskEdit from './components/TaskEdit';
+import Checkbox from '@common/ui/Checkbox';
 
 export interface TaskInterface {
-  isCompleted: boolean,
+  is_completed: boolean,
   title: string,
 }
 
@@ -15,7 +16,7 @@ const Task: React.FC<{
   data
 }) => {
   const {
-    isCompleted,
+    is_completed,
     title
   } = data;
 
@@ -33,13 +34,10 @@ const Task: React.FC<{
         ) : (
         <>
           <div className="flex items-center">
-            <span className="text-[15px]">
-              {isCompleted ? (
-                <FaCheckCircle />
-              ) : (
-                <FaRegCheckCircle />
-              )}
-            </span>
+            <Checkbox
+              className="text-[15px]"
+              isCheck={is_completed}
+            />
             <p className="text-[14px] ml-5">
               {title}
             </p>
