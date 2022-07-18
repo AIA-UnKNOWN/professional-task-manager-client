@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@services/store';
 import TasksActions from '@services/actions/tasks';
 import { setTasks } from '@services/reducers/tasks';
 
-const usePendingTasksList = () => {
+const usePendingTasks = () => {
   const [ tasks ] = useAppSelector(state => [
     state.tasks.data,
   ]);
@@ -28,4 +28,4 @@ const usePendingTasksList = () => {
   }
 }
 
-export default usePendingTasksList;
+export default usePendingTasks;

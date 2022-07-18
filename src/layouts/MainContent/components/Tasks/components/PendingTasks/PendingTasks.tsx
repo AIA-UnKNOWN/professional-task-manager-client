@@ -1,20 +1,16 @@
 import React from 'react';
-import { FaPlusCircle } from 'react-icons/fa';
 
-import Container from '@common/Container';
-import PendingTasksList from './components/PendingTasksList';
+import usePendingTasks from './PendingTasks.hook'
+import DefaultTasks from '@layouts/MainContent/components/Tasks/components/DefaultTasks';
 
 const PendingTasks: React.FC = () => {
+  const { tasks } = usePendingTasks();
+
   return (
-    <Container className="bg-light-gray max-w-[500px] py-5 px-7">
-      <div className="flex justify-between items-center">
-        <p className="text-[25px] font-bold">Pending Tasks</p>
-        <span className="text-[25px]">
-          <FaPlusCircle />
-        </span>
-      </div>
-      <PendingTasksList />
-    </Container>
+    <DefaultTasks
+      title="Pending Tasks"
+      tasks={tasks}
+    />
   );
 }
 
