@@ -1,19 +1,27 @@
 import React from 'react';
 import { FaFlag, FaTags } from 'react-icons/fa';
 
-const TaskModifierPanel: React.FC = () => {
+const TaskModifierPanel: React.FC<{
+  onCancel: () => void,
+  onSave: () => void
+}> = ({
+  onCancel,
+  onSave,
+}) => {
   return (
     <div className="flex justify-between pb-5 pt-2">
       <div>
         <button
           className="w-[60px] h-[25px] bg-light-gray text-[12px]
           rounded-[20px] mr-2"
+          onClick={onCancel}
         >
           Cancel
         </button>
         <button
           className="w-[60px] h-[25px] bg-light-gray text-[12px]
           rounded-[20px]"
+          onClick={onSave}
         >
           Save
         </button>

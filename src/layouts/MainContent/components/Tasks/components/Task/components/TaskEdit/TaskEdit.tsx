@@ -5,8 +5,14 @@ import { TaskInterface } from '@layouts/MainContent/components/Tasks/components/
 import { TextArea, TaskModifierPanel, TaskActions } from './components';
 
 const TaskEdit: React.FC<{
-  data: TaskInterface
-}> = ({ data }) => {
+  data: TaskInterface;
+  onCancelTask: () => void;
+  onSaveTask: () => void;
+}> = ({
+  data,
+  onCancelTask,
+  onSaveTask,
+}) => {
   const {
     is_completed,
     title
@@ -22,7 +28,10 @@ const TaskEdit: React.FC<{
         <TextArea />
         <TaskActions />
       </div>
-      <TaskModifierPanel />
+      <TaskModifierPanel
+        onCancel={onCancelTask}
+        onSave={onSaveTask}
+      />
     </div>
   );
 }

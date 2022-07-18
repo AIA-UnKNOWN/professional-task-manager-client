@@ -30,6 +30,8 @@ const Task: React.FC<{
         {isEditMode ? (
           <TaskEdit
             data={data}
+            onCancelTask={() => setIsEditMode(false)}
+            onSaveTask={() => null}
           />
         ) : (
         <>
