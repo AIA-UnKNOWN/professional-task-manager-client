@@ -9,7 +9,7 @@ const Checkbox: React.FC<{
   isCheck
 }) => {
   return (
-    <span className={className}>
+    <span className={`cursor-pointer ${className}`}>
       {isCheck ? (
         <FaCheckCircle />
       ) : (
