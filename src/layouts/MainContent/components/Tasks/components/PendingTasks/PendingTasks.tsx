@@ -4,7 +4,9 @@ import usePendingTasks from './PendingTasks.hook'
 import DefaultTasks from '@layouts/MainContent/components/Tasks/components/DefaultTasks';
 
 const PendingTasks: React.FC = () => {
-  const { pendingTasks } = usePendingTasks();
+  const {
+    pendingTasks,
+  } = usePendingTasks();
 
   return (
     <DefaultTasks

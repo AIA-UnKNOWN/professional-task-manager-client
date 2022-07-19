@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@services/store';
 
 import TasksActions from '@services/actions/tasks';
@@ -9,22 +9,24 @@ const usePendingTasks = () => {
     state.tasks.data,
   ]);
   const dispatch = useAppDispatch();
+  const [pendingTasks, setPendingTasks] = useState([]);
 
   useEffect(() => {
-    getAllPendingTasks();
+    getAllTasks();
   }, []);
 
-  const getAllPendingTasks = async (): Promise<void> => {
+  const getAllTasks = async (): Promise<void> => {
     try {
       const tasks = await TasksActions.getAll(2);
-      dispatch(setTasks(tasks.filter(task => !task.is_completed)));
+      dispatch(setTasks(tasks));
+      setPendingTasks(tasks.filter(task => !task.is_completed));
     } catch(error) {
       console.log('GetAllTasksError', error);
     }
   }
 
   return {
-    pendingTasks: tasks,
+    pendingTasks,
   }
 }
 
