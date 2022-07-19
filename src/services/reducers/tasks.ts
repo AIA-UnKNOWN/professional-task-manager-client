@@ -32,10 +32,7 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     setProjectId: (state: TasksState, action: SetProjectIdAction) => {
-      state = {
-        ...state,
-        projectId: action.payload
-      }
+      state.projectId = action.payload;
     },
     setTasks: (state: TasksState, action: Action) => {
       state.data = action.payload;
