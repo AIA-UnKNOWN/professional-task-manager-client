@@ -11,20 +11,20 @@ const usePendingTasks = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getAllTasks();
+    getAllPendingTasks();
   }, []);
 
-  const getAllTasks = async (): Promise<void> => {
+  const getAllPendingTasks = async (): Promise<void> => {
     try {
       const tasks = await TasksActions.getAll(2);
-      dispatch(setTasks(tasks));
+      dispatch(setTasks(tasks.filter(task => !task.is_completed)));
     } catch(error) {
       console.log('GetAllTasksError', error);
     }
   }
 
   return {
-    tasks,
+    pendingTasks: tasks,
   }
 }
 
