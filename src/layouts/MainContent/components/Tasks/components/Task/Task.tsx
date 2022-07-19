@@ -45,7 +45,8 @@ const Task: React.FC<{
             </p>
           </div>
           <span
-            className="text-[25px] cursor-pointer"
+            className="text-[25px] cursor-pointer hover:bg-light-gray-3
+            rounded-full text-light-black"
             onClick={() => setIsEditMode(!isEditMode)}
           >
             <FaAngleDown />
