@@ -6,18 +6,19 @@ import { setTasks } from '@services/reducers/tasks';
 
 const usePendingTasks = () => {
   const [ tasks ] = useAppSelector(state => [
-    state.tasks.data,
+    state.tasks,
   ]);
   const dispatch = useAppDispatch();
   const [pendingTasks, setPendingTasks] = useState([]);
 
   useEffect(() => {
     getAllTasks();
-  }, []);
+  }, [tasks.projectId]);
 
   const getAllTasks = async (): Promise<void> => {
+    const projectId = tasks.projectId;
     try {
-      const tasks = await TasksActions.getAll(2);
+      const tasks = await TasksActions.getAll(projectId);
       dispatch(setTasks(tasks));
       setPendingTasks(tasks.filter(task => !task.is_completed));
     } catch(error) {

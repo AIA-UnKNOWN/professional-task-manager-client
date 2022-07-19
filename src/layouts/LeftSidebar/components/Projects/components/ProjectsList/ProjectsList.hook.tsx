@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from "@services/store";
 
 import ProjectsActions from '@services/actions/projects';
 import { setProjects } from '@services/reducers/projects';
+import { setProjectId } from '@services/reducers/tasks';
 
 const useProjectsList = () => {
   const [ projects ] = useAppSelector(state => [
@@ -19,8 +20,13 @@ const useProjectsList = () => {
     dispatch(setProjects(projects));
   }
 
+  const selectProjectById = (id: number) => {
+    dispatch(setProjectId(id));
+  }
+
   return {
     projects,
+    selectProjectById,
   }
 }
 

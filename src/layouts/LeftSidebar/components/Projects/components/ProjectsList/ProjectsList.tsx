@@ -3,7 +3,10 @@ import React from 'react';
 import useProjectsList from './ProjectsList.hook';
 
 const ProjectsList: React.FC = () => {
-  const { projects } = useProjectsList();
+  const {
+    projects,
+    selectProjectById,
+  } = useProjectsList();
 
   if (projects && projects.length === 0) return null;
 
@@ -14,6 +17,7 @@ const ProjectsList: React.FC = () => {
           flex justify-between items-center px-4 mb-1 cursor-pointer
           last-of-type:mb-0 hover:bg-light-gray-3"
           key={project.id}
+          onClick={() => selectProjectById(project.id)}
         >
           <span>
             {project.name}
