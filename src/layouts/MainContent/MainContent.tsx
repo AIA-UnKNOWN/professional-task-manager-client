@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppSelector } from '@services/store';
 
+import Container from '@common/Container';
 import Tasks from './components/Tasks';
 
 const MainContent: React.FC = () => {
@@ -12,7 +13,14 @@ const MainContent: React.FC = () => {
         Project Title
       </p>
       <div>
-        {projectId && <Tasks />}
+        {projectId ? (
+          <Tasks />
+        ) : (
+          <Container className="bg-light-gray-2 h-[200px] flex
+          justify-center items-center mx-5">
+            <p>No project selected</p>
+          </Container>
+        )}
       </div>
     </div>
   );
