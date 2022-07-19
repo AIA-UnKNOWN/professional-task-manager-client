@@ -20,7 +20,14 @@ const DefaultTasks: React.FC<{
           <FaPlusCircle />
         </span>
       </div>
-      <DefaultTasksList tasks={tasks} />
+      {tasks.length > 0 ? (
+        <DefaultTasksList tasks={tasks} />
+      ) : (
+        <Container className="flex justify-center items-center
+        h-[50px] bg-light-gray-2 mt-5 text-[14px]">
+          <p>No tasks here</p>          
+        </Container>
+      )}
     </Container>
   );
 }
