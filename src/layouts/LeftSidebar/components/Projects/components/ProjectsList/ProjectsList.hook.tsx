@@ -6,8 +6,12 @@ import { setProjects } from '@services/reducers/projects';
 import { setProjectId } from '@services/reducers/tasks';
 
 const useProjectsList = () => {
-  const [ projects ] = useAppSelector(state => [
+  const [
+    projects,
+    selectedProjectId,
+  ] = useAppSelector(state => [
     state.projects.data,
+    state.tasks.projectId,
   ]);
   const dispatch = useAppDispatch();
 
@@ -26,6 +30,7 @@ const useProjectsList = () => {
 
   return {
     projects,
+    selectedProjectId,
     selectProjectById,
   }
 }

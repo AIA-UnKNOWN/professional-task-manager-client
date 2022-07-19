@@ -5,6 +5,7 @@ import useProjectsList from './ProjectsList.hook';
 const ProjectsList: React.FC = () => {
   const {
     projects,
+    selectedProjectId,
     selectProjectById,
   } = useProjectsList();
 
@@ -13,9 +14,10 @@ const ProjectsList: React.FC = () => {
   return (
     <div className="my-2">
       {projects.map(project => (
-        <div className="bg-light-gray rounded-[10px] text-[15px] w-[211px] h-[34px]
+        <div className={`${project.id === selectedProjectId ? 'bg-light-gray-3' : 'bg-light-gray'}
+          rounded-[10px] text-[15px] w-[211px] h-[34px]
           flex justify-between items-center px-4 mb-1 cursor-pointer
-          last-of-type:mb-0 hover:bg-light-gray-3"
+          last-of-type:mb-0 hover:bg-light-gray-3 ${project.id === selectedProjectId &&`bg-light-gray-3`}`}
           key={project.id}
           onClick={() => selectProjectById(project.id)}
         >
