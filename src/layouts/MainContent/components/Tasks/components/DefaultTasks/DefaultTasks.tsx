@@ -13,7 +13,7 @@ const DefaultTasks: React.FC<{
   tasks,
 }) => {
   return (
-    <Container className="bg-light-gray max-w-[500px] py-5 px-7">
+    <Container className="bg-light-gray w-[500px] py-5 px-7 h-fit">
       <div className="flex justify-between items-center">
         <p className="text-[25px] font-bold">{title}</p>
         <span className="text-[25px]">

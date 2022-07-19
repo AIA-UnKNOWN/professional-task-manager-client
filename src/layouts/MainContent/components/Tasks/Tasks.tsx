@@ -5,9 +5,9 @@ import CompletedTasks from './components/CompletedTasks';
 
 const Tasks: React.FC = () => {
   return (
-    <div>
+    <div className="flex justify-center">
       <PendingTasks />
-      <div></div>
+      <div className="w-[1px] bg-light-gray-3 mx-5"></div>
       <CompletedTasks />
     </div>
   );
