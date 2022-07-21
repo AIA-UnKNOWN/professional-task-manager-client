@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 interface ActionDropdownProps {
-  displayedContentComponent: React.FC | JSX.Element[];
-  displayedContentComponentClassName?: string; dropdownComponent: React.FC | JSX.Element[];
+  displayedContentComponent: ReactNode;
+  displayedContentComponentClassName?: string;
+  dropdownComponent: ReactNode;
   dropdownComponentClassName?: string;
 }
 
