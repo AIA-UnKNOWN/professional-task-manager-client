@@ -1,30 +1,28 @@
-import { useEffect, useState, useReducer, ReducerWithoutAction } from 'react';
+import { useState } from 'react';
 
 import { TaskProps } from './Task';
 import TaskActions from '@services/actions/tasks';
 
-const reducer: ReducerWithoutAction<any> = (state, action) => {
-  switch(action.type) {
-    case 'title':
-      return { ...state, title: action.value };
-    case 'description':
-      return { ...state, description: action.value };
-    case 'is_completed':
-      return { ...state, is_completed: action.value };
-  }
-}
-
 const useTask = (props: TaskProps) => {
   const { id, title, description, is_completed } = props.data;
-  const [isEditMode, setIsEditMode] = useState(false); 
-  const [task, dispatch] = useReducer(reducer, {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [task, setTask] = useState({
     id,
     title,
     description,
     is_completed,
   });
 
-  const onChangeHandler: (type: string, value: string) => void = (type, value) => dispatch({ type, value });
+  const onChangeHandler: (type: string, value: any) => void = (type, value) => {
+    switch(type) {
+      case 'title':
+        return setTask({ ...task, title: value });
+      case 'description':
+        return setTask({ ...task, description: value });
+      case 'is_completed':
+        return setTask({ ...task, is_completed: value });
+    }
+  };
 
   const onSaveTask = async (): Promise<void> => {
     try {
@@ -40,9 +38,9 @@ const useTask = (props: TaskProps) => {
         ...task,
         is_completed: !is_completed
       });
-      response.status === 200 && dispatch({
-        type: 'is_completed',
-        value: !is_completed
+      response.status === 200 && setTask({
+        ...task,
+        is_completed: !is_completed
       });
     } catch(error) {
       console.log('onSaveTaskError', error);
