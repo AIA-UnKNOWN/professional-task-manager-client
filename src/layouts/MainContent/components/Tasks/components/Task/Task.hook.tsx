@@ -13,12 +13,13 @@ const reducer: ReducerWithoutAction<any> = (state, action) => {
 }
 
 const useTask = (props: TaskProps) => {
-  const { id, title, description } = props.data;
+  const { id, title, description, is_completed } = props.data;
   const [isEditMode, setIsEditMode] = useState(false); 
   const [task, dispatch] = useReducer(reducer, {
     id,
     title,
     description,
+    is_completed,
   });
 
   const onChangeHandler: (type: string, value: string) => void = (type, value) => dispatch({ type, value });
