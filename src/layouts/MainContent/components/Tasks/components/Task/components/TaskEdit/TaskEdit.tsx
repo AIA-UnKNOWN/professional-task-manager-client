@@ -9,11 +9,13 @@ const TaskEdit: React.FC<{
   onCancelTask: () => void;
   onSaveTask: () => void;
   onChangeHandler: (type: string, value: string) => void;
+  onChangeTaskStatus(): void;
 }> = ({
   data,
   onCancelTask,
   onSaveTask,
   onChangeHandler,
+  onChangeTaskStatus,
 }) => {
   const {
     is_completed,
@@ -25,6 +27,7 @@ const TaskEdit: React.FC<{
         <Checkbox
           className="text-[15px]"
           isCheck={is_completed}
+          onChange={onChangeTaskStatus}
         />
         <TextArea
           task={data}

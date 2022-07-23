@@ -36,6 +36,7 @@ const Task: React.FC<TaskProps> = props => {
             onCancelTask={() => setIsEditMode(false)}
             onSaveTask={onSaveTask}
             onChangeHandler={onChangeHandler}
+            onChangeTaskStatus={onChangeTaskStatus}
           />
         ) : (
           <>
