@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaAngleDown } from 'react-icons/fa';
 
+import useTask from './Task.hook';
 import Container from '@common/Container';
 import TaskEdit from './components/TaskEdit';
 import Checkbox from '@common/ui/Checkbox';
@@ -16,11 +17,10 @@ const Task: React.FC<{
   data
 }) => {
   const {
-    is_completed,
-    title
-  } = data;
-
-  const [isEditMode, setIsEditMode] = useState(false);
+    isEditMode, setIsEditMode,
+    task, onChangeHandler,
+    onSaveTask,
+  } = useTask({ data });
 
   return (
     <Container
@@ -29,29 +29,30 @@ const Task: React.FC<{
       <div className="flex items-center justify-between min-h-[50px] px-5">
         {isEditMode ? (
           <TaskEdit
-            data={data}
+            data={task}
             onCancelTask={() => setIsEditMode(false)}
-            onSaveTask={() => null}
+            onSaveTask={onSaveTask}
+            onChangeHandler={onChangeHandler}
           />
         ) : (
-        <>
-          <div className="flex items-center">
-            <Checkbox
-              className="text-[15px]"
-              isCheck={is_completed}
-            />
-            <p className="text-[14px] ml-5">
-              {title}
-            </p>
-          </div>
-          <span
-            className="text-[25px] cursor-pointer hover:bg-light-gray-3
-            rounded-full text-light-black"
-            onClick={() => setIsEditMode(!isEditMode)}
-          >
-            <FaAngleDown />
-          </span>
-        </>
+          <>
+            <div className="flex items-center">
+              <Checkbox
+                className="text-[15px]"
+                isCheck={task.is_completed}
+              />
+              <p className="text-[14px] ml-5">
+                {task.title}
+              </p>
+            </div>
+            <span
+              className="text-[25px] cursor-pointer hover:bg-light-gray-3
+              rounded-full text-light-black"
+              onClick={() => setIsEditMode(!isEditMode)}
+            >
+              <FaAngleDown />
+            </span>
+          </>
         )}
       </div>
     </Container>

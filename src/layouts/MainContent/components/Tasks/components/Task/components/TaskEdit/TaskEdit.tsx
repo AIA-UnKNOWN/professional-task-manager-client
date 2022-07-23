@@ -8,14 +8,15 @@ const TaskEdit: React.FC<{
   data: TaskInterface;
   onCancelTask: () => void;
   onSaveTask: () => void;
+  onChangeHandler: (type: string, value: string) => void;
 }> = ({
   data,
   onCancelTask,
   onSaveTask,
+  onChangeHandler,
 }) => {
   const {
     is_completed,
-    title
   } = data;
 
   return (
@@ -25,7 +26,9 @@ const TaskEdit: React.FC<{
           className="text-[15px]"
           isCheck={is_completed}
         />
-        <TextArea />
+        <TextArea
+          onChangeHandler={onChangeHandler}
+        />
         <TaskActions />
       </div>
       <TaskModifierPanel
