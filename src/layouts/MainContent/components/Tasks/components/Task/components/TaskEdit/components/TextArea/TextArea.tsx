@@ -1,10 +1,14 @@
 import React from 'react';
 
+import { TaskInterface } from '@layouts/MainContent/components/Tasks/components/Task';
+
 interface TextAreaProps {
+  task: TaskInterface;
   onChangeHandler: (type: string, value: string) => void;
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
+  task,
   onChangeHandler
 }) => {
   return (
@@ -16,6 +20,7 @@ const TextArea: React.FC<TextAreaProps> = ({
           type="text"
           placeholder="Title"
           onChange={e => onChangeHandler('title', e.target.value)}
+          value={task.title}
         />
         <textarea
           className="placeholder:text-[14px] bg-light-gray-2 resize-none
@@ -24,6 +29,7 @@ const TextArea: React.FC<TextAreaProps> = ({
           id="task-description"
           placeholder="Description"
           onChange={e => onChangeHandler('description', e.target.value)}
+          value={task.description}
         >
         </textarea>
       </div>

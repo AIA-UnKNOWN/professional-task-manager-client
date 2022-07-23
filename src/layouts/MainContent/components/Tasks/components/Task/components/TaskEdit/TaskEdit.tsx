@@ -27,6 +27,7 @@ const TaskEdit: React.FC<{
           isCheck={is_completed}
         />
         <TextArea
+          task={data}
           onChangeHandler={onChangeHandler}
         />
         <TaskActions />

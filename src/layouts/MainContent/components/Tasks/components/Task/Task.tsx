@@ -7,8 +7,10 @@ import TaskEdit from './components/TaskEdit';
 import Checkbox from '@common/ui/Checkbox';
 
 export interface TaskInterface {
-  is_completed: boolean,
-  title: string,
+  id: number;
+  is_completed: boolean;
+  title: string;
+  description: string;
 }
 
 const Task: React.FC<{
