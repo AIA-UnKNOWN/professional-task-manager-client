@@ -1,9 +1,12 @@
 import React from 'react';
 
+import useTask from './Tasks.hook';
 import PendingTasks from './components/PendingTasks';
 import CompletedTasks from './components/CompletedTasks';
 
 const Tasks: React.FC = () => {
+  useTask();
+
   return (
     <div className="flex justify-center">
       <PendingTasks />

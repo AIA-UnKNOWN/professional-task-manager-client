@@ -1,27 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from '@services/store';
-
-import TasksActions from '@services/actions/tasks';
-import { setTasks } from '@services/reducers/tasks';
+import { useAppSelector } from '@services/store';
 
 const useCompletedTasks = () => {
   const [ tasks ] = useAppSelector(state => [ state.tasks ]);
-  const dispatch = useAppDispatch();
   const [completedTasks, setCompletedTasks] = useState([]);
 
   useEffect(() => {
     getAllCompletedTasks();
-  }, [tasks.projectId]);
+  }, [tasks.projectId, tasks.data]);
 
-  const getAllCompletedTasks = async (): Promise<void> => {
-    const projectId = tasks.projectId;
-    try {
-      const tasks = await TasksActions.getAll(projectId);
-      dispatch(setTasks(tasks));
-      setCompletedTasks(tasks.filter(task => task.is_completed));
-    } catch(error) {
-      console.log('GetAllTasksError', error);
-    }
+  const getAllCompletedTasks = (): void => {
+    const completedTasks = tasks.data.filter(task => task.is_completed);
+    setCompletedTasks(completedTasks);
   }
 
   return {

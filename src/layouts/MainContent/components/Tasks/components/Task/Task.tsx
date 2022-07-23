@@ -13,16 +13,16 @@ export interface TaskInterface {
   description: string;
 }
 
-const Task: React.FC<{
-  data: TaskInterface
-}> = ({
-  data
-}) => {
+export interface TaskProps {
+  data: TaskInterface;
+}
+
+const Task: React.FC<TaskProps> = props => {
   const {
     isEditMode, setIsEditMode,
     task, onChangeHandler,
     onSaveTask,
-  } = useTask({ data });
+  } = useTask(props);
 
   return (
     <Container

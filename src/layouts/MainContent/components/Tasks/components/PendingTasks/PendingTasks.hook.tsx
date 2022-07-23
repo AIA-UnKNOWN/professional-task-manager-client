@@ -1,29 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@services/store';
-
-import TasksActions from '@services/actions/tasks';
-import { setTasks } from '@services/reducers/tasks';
+import { useAppSelector } from '@services/store';
 
 const usePendingTasks = () => {
   const [ tasks ] = useAppSelector(state => [
     state.tasks,
   ]);
-  const dispatch = useAppDispatch();
   const [pendingTasks, setPendingTasks] = useState([]);
 
   useEffect(() => {
     getAllTasks();
-  }, [tasks.projectId]);
+  }, [tasks.projectId, tasks.data]);
 
-  const getAllTasks = async (): Promise<void> => {
-    const projectId = tasks.projectId;
-    try {
-      const tasks = await TasksActions.getAll(projectId);
-      dispatch(setTasks(tasks));
-      setPendingTasks(tasks.filter(task => !task.is_completed));
-    } catch(error) {
-      console.log('GetAllTasksError', error);
-    }
+  const getAllTasks = (): void => {
+    const pendingTasks = tasks.data.filter(task => !task.is_completed);
+    setPendingTasks(pendingTasks);
   }
 
   return {

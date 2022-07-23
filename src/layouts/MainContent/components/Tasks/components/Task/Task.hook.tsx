@@ -1,5 +1,6 @@
 import { useState, useReducer, ReducerWithoutAction } from 'react';
 
+import { TaskProps } from './Task';
 import TaskActions from '@services/actions/tasks';
 
 const reducer: ReducerWithoutAction<any> = (state, action) => {
@@ -11,8 +12,8 @@ const reducer: ReducerWithoutAction<any> = (state, action) => {
   }
 }
 
-const useTask = ({ data }) => {
-  const { id, title, description } = data;
+const useTask = (props: TaskProps) => {
+  const { id, title, description } = props.data;
   const [isEditMode, setIsEditMode] = useState(false); 
   const [task, dispatch] = useReducer(reducer, {
     id,
