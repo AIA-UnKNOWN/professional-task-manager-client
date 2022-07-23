@@ -22,6 +22,7 @@ const Task: React.FC<TaskProps> = props => {
     isEditMode, setIsEditMode,
     task, onChangeHandler,
     onSaveTask,
+    onChangeTaskStatus,
   } = useTask(props);
 
   return (
@@ -42,6 +43,7 @@ const Task: React.FC<TaskProps> = props => {
               <Checkbox
                 className="text-[15px]"
                 isCheck={task.is_completed}
+                onChange={onChangeTaskStatus}
               />
               <p className="text-[14px] ml-5">
                 {task.title}

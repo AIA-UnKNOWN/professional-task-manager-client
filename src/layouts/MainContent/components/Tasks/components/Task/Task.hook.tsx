@@ -1,4 +1,4 @@
-import { useState, useReducer, ReducerWithoutAction } from 'react';
+import { useEffect, useState, useReducer, ReducerWithoutAction } from 'react';
 
 import { TaskProps } from './Task';
 import TaskActions from '@services/actions/tasks';
@@ -9,6 +9,8 @@ const reducer: ReducerWithoutAction<any> = (state, action) => {
       return { ...state, title: action.value };
     case 'description':
       return { ...state, description: action.value };
+    case 'is_completed':
+      return { ...state, is_completed: action.value };
   }
 }
 
@@ -32,10 +34,26 @@ const useTask = (props: TaskProps) => {
     }
   }
 
+  const onChangeTaskStatus = async (): Promise<void> => {
+    try {
+      const response = await TaskActions.update(id, {
+        ...task,
+        is_completed: !is_completed
+      });
+      response.status === 200 && dispatch({
+        type: 'is_completed',
+        value: !is_completed
+      });
+    } catch(error) {
+      console.log('onSaveTaskError', error);
+    }
+  }
+
   return {
     isEditMode, setIsEditMode,
     task, onChangeHandler,
     onSaveTask,
+    onChangeTaskStatus,
   }
 }
 
