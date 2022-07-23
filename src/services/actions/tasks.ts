@@ -1,6 +1,16 @@
 import axios from 'axios';
 
 import env from '@env.js';
+import { TaskInterface } from '@layouts/MainContent/components/Tasks/components/Task/Task';
+
+const update = async (id: number, updatedTask: TaskInterface): Promise<any> => {
+  try {
+    const response = await axios.put(`${env.api.url}/task/${id}/update`, updatedTask);
+    return response;
+  } catch(error) {
+    console.log('UpdateTaskError', error);
+  }
+}
 
 const getAll = async (projectId: number): Promise<void> => {
   try {
@@ -22,6 +32,7 @@ const getAllSample = async (): Promise<Array<{ id: number, name: string }>> => {
 }
 
 export default {
+  update,
   getAll,
   getAllSample
 }
