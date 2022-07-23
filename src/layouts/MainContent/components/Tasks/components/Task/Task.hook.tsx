@@ -1,9 +1,13 @@
 import { useState } from 'react';
+import { useAppSelector, useAppDispatch } from '@services/store';
 
-import { TaskProps } from './Task';
+import { TaskProps, TaskInterface } from './Task';
 import TaskActions from '@services/actions/tasks';
+import { setTasks } from '@services/reducers/tasks';
 
 const useTask = (props: TaskProps) => {
+  const [ tasks ] = useAppSelector(state => [ state.tasks ]);
+  const dispatch = useAppDispatch();
   const { id, title, description, is_completed } = props.data;
   const [isEditMode, setIsEditMode] = useState(false);
   const [task, setTask] = useState({
@@ -33,18 +37,26 @@ const useTask = (props: TaskProps) => {
   }
 
   const onChangeTaskStatus = async (): Promise<void> => {
+    const updatedTask = { ...task, is_completed: !is_completed };
     try {
-      const response = await TaskActions.update(id, {
-        ...task,
-        is_completed: !is_completed
-      });
-      response.status === 200 && setTask({
-        ...task,
-        is_completed: !is_completed
-      });
+      const response = await TaskActions.update(id, updatedTask);
+      if (response.data !== "OK") return;
+      setTask(updatedTask);
+      updateTasksRedux(updatedTask.id, updatedTask);
     } catch(error) {
       console.log('onSaveTaskError', error);
     }
+  }
+
+  const updateTasksRedux = (id: number, updatedTask: TaskInterface): void => {
+    tasks.data && tasks.data.length > 0 &&
+      dispatch(
+        setTasks(tasks.data.map(task => {
+          return parseInt(task.id) !== id ?
+            task :
+            updatedTask;
+        }))
+      );
   }
 
   return {
