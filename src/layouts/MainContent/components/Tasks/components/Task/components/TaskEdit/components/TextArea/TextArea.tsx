@@ -29,7 +29,7 @@ const TextArea: React.FC<TextAreaProps> = ({
           id="task-description"
           placeholder="Description"
           onChange={e => onChangeHandler('description', e.target.value)}
-          value={task.description}
+          value={task.description || ''}
         >
         </textarea>
       </div>
