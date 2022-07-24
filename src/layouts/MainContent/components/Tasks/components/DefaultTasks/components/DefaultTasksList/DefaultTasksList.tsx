@@ -36,9 +36,17 @@ const PendingTasksList: React.FC<{
         return (
           <>
             {taskCreatedDates.map(tcd => tcd.taskId).includes(task.id) && (
-              <div>
-                <span>{taskCreatedDate.date}</span>
-                <hr />
+              <div
+                className="relative border-b border-light-black
+                mt-8 mb-5"
+              >
+                <span
+                  className="absolute top-[50%] translate-y-[-50%]
+                  left-[20px] bg-light-gray px-2 text-[14px]
+                  text-light-black"
+                >
+                  {taskCreatedDate.date}
+                </span>
               </div>
             )}
             <Task
