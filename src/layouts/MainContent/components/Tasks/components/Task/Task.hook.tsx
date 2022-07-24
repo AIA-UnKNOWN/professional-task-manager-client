@@ -56,15 +56,35 @@ const useTask = (props: TaskProps) => {
     }
   }
 
-  const updateTasksRedux = (id: number, updatedTask: TaskInterface): void => {
-    tasks.data && tasks.data.length > 0 &&
-      dispatch(
-        setTasks(tasks.data.map(task => {
-          return parseInt(task.id) !== id ?
-            task :
-            updatedTask;
-        }))
-      );
+  const updateTasksRedux = (id: number, updatedTask: TaskInterface, type: string = "update"): void => {
+    switch(type) {
+      case 'update':
+        tasks.data && tasks.data.length > 0 &&
+          dispatch(
+            setTasks(tasks.data.map(task => {
+              return parseInt(task.id) !== id ?
+                task :
+                updatedTask;
+            }))
+          );
+        break;
+      case 'delete':
+        tasks.data && tasks.data.length > 0 &&
+          dispatch(
+            setTasks(tasks.data.filter(task => parseInt(task.id) !== id))
+          );
+        break;  
+    }
+  }
+
+  const deleteTask = async (): Promise<void> => {
+    try {
+      const response = await TaskActions.deleteTask(task.id);
+      if (response.data !== "OK") return;
+      updateTasksRedux(task.id, task, 'delete');
+    } catch(error) {
+      console.log('DeleteTaskError', error);
+    }
   }
 
   return {
@@ -73,6 +93,7 @@ const useTask = (props: TaskProps) => {
     task, onChangeHandler,
     onSaveTask,
     onChangeTaskStatus,
+    deleteTask,
   }
 }
 

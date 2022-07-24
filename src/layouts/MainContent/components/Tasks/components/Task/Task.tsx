@@ -24,6 +24,7 @@ const Task: React.FC<TaskProps> = props => {
     task, onChangeHandler,
     onSaveTask,
     onChangeTaskStatus,
+    deleteTask,
   } = useTask(props);
 
   return (
@@ -39,6 +40,7 @@ const Task: React.FC<TaskProps> = props => {
             onSaveTask={onSaveTask}
             onChangeHandler={onChangeHandler}
             onChangeTaskStatus={onChangeTaskStatus}
+            onDeleteTask={deleteTask}
           />
         ) : (
           <>

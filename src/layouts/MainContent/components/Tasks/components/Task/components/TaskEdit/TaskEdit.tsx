@@ -11,6 +11,7 @@ const TaskEdit: React.FC<{
   onSaveTask: () => void;
   onChangeHandler: (type: string, value: string) => void;
   onChangeTaskStatus(): void;
+  onDeleteTask?(): void;
 }> = ({
   data,
   onCancelTask,
@@ -18,6 +19,7 @@ const TaskEdit: React.FC<{
   onSaveTask,
   onChangeHandler,
   onChangeTaskStatus,
+  onDeleteTask,
 }) => {
   const {
     is_completed,
@@ -35,7 +37,9 @@ const TaskEdit: React.FC<{
           task={data}
           onChangeHandler={onChangeHandler}
         />
-        <TaskActions />
+        <TaskActions
+          onDeleteTask={onDeleteTask}
+        />
       </div>
       <TaskModifierPanel
         saveButtonText={saveButtonText}
