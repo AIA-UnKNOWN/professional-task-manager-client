@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaPlusCircle } from 'react-icons/fa';
 
+import useDefaultTasks from './DefaultTasks.hook';
 import Container from '@common/Container';
 import DefaultTasksList from './components/DefaultTasksList';
 import { TaskInterface } from '@layouts/MainContent/components/Tasks/components/Task';
@@ -12,11 +13,16 @@ const DefaultTasks: React.FC<{
   title,
   tasks,
 }) => {
+  const { createTask } = useDefaultTasks();
+
   return (
     <Container className="bg-light-gray w-[500px] py-5 px-7 h-fit">
       <div className="flex justify-between items-center">
         <p className="text-[25px] font-bold">{title}</p>
-        <span className="text-[25px]">
+        <span
+          className="text-[25px] cursor-pointer"
+          onClick={createTask}
+        >
           <FaPlusCircle />
         </span>
       </div>
