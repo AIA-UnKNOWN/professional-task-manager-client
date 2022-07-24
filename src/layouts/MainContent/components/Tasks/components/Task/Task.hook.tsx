@@ -10,6 +10,7 @@ const useTask = (props: TaskProps) => {
   const dispatch = useAppDispatch();
   const { id, title, description, is_completed } = props.data;
   const [isEditMode, setIsEditMode] = useState(false);
+  const [saveButtonText, setSaveButtonText] = useState('Save');
   const [task, setTask] = useState({
     id,
     title,
@@ -18,6 +19,7 @@ const useTask = (props: TaskProps) => {
   });
 
   const onChangeHandler: (type: string, value: any) => void = (type, value) => {
+    setSaveButtonText('Save');
     switch(type) {
       case 'title':
         return setTask({ ...task, title: value });
@@ -29,8 +31,14 @@ const useTask = (props: TaskProps) => {
   };
 
   const onSaveTask = async (): Promise<void> => {
+    setSaveButtonText('Saving...');
     try {
-      await TaskActions.update(id, task);
+      const response = await TaskActions.update(id, task);
+      if (response.data !== "OK") return;
+      setSaveButtonText('Saved!');
+      setTimeout(() => {
+        setIsEditMode(!isEditMode);
+      }, 1000);
     } catch(error) {
       console.log('onSaveTaskError', error);
     }
@@ -61,6 +69,7 @@ const useTask = (props: TaskProps) => {
 
   return {
     isEditMode, setIsEditMode,
+    saveButtonText,
     task, onChangeHandler,
     onSaveTask,
     onChangeTaskStatus,

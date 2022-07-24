@@ -2,9 +2,11 @@ import React from 'react';
 import { FaFlag, FaTags } from 'react-icons/fa';
 
 const TaskModifierPanel: React.FC<{
-  onCancel: () => void,
-  onSave: () => void
+  saveButtonText?: string;
+  onCancel: () => void;
+  onSave: () => void;
 }> = ({
+  saveButtonText,
   onCancel,
   onSave,
 }) => {
@@ -23,7 +25,7 @@ const TaskModifierPanel: React.FC<{
           rounded-[20px]"
           onClick={onSave}
         >
-          Save
+          {saveButtonText || 'Save'}
         </button>
       </div>
       <div>

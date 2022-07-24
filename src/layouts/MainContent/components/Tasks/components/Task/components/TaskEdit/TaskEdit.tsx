@@ -7,12 +7,14 @@ import { TextArea, TaskModifierPanel, TaskActions } from './components';
 const TaskEdit: React.FC<{
   data: TaskInterface;
   onCancelTask: () => void;
+  saveButtonText?: string;
   onSaveTask: () => void;
   onChangeHandler: (type: string, value: string) => void;
   onChangeTaskStatus(): void;
 }> = ({
   data,
   onCancelTask,
+  saveButtonText,
   onSaveTask,
   onChangeHandler,
   onChangeTaskStatus,
@@ -36,6 +38,7 @@ const TaskEdit: React.FC<{
         <TaskActions />
       </div>
       <TaskModifierPanel
+        saveButtonText={saveButtonText}
         onCancel={onCancelTask}
         onSave={onSaveTask}
       />

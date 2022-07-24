@@ -20,6 +20,7 @@ export interface TaskProps {
 const Task: React.FC<TaskProps> = props => {
   const {
     isEditMode, setIsEditMode,
+    saveButtonText,
     task, onChangeHandler,
     onSaveTask,
     onChangeTaskStatus,
@@ -34,6 +35,7 @@ const Task: React.FC<TaskProps> = props => {
           <TaskEdit
             data={task}
             onCancelTask={() => setIsEditMode(false)}
+            saveButtonText={saveButtonText}
             onSaveTask={onSaveTask}
             onChangeHandler={onChangeHandler}
             onChangeTaskStatus={onChangeTaskStatus}
