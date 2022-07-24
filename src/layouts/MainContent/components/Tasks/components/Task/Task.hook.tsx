@@ -46,10 +46,10 @@ const useTask = (props: TaskProps) => {
 
   const onChangeTaskStatus = async (): Promise<void> => {
     const updatedTask = { ...task, is_completed: !task.is_completed };
+    setTask(updatedTask);
     try {
       const response = await TaskActions.update(id, updatedTask);
       if (response.data !== "OK") return;
-      setTask(updatedTask);
       updateTasksRedux(updatedTask.id, updatedTask);
     } catch(error) {
       console.log('onSaveTaskError', error);
