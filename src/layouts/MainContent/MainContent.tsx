@@ -5,15 +5,23 @@ import Container from '@common/Container';
 import Tasks from './components/Tasks';
 
 const MainContent: React.FC = () => {
-  const projectId = useAppSelector(state => state.tasks.projectId);
+  const [
+    tasks,
+    projects,
+  ] = useAppSelector(state => [
+    state.tasks,
+    state.projects,
+  ]);
+
+  const currentProject = projects.data.find(p => p.id === tasks.projectId);
 
   return (
     <div className="flex-1">
       <p className="text-[30px] font-bold text-center my-10">
-        Project Title
+        {currentProject && currentProject.name || 'No project title'}
       </p>
       <div>
-        {projectId ? (
+        {tasks.projectId ? (
           <Tasks />
         ) : (
           <Container className="bg-light-gray-2 h-[200px] flex
