@@ -3,7 +3,11 @@ import { FaEllipsisH } from 'react-icons/fa';
 
 import ActionDropdown from '@common/ui/ActionDropdown';
 
-const TaskActions: React.FC = () => {
+const TaskActions: React.FC<{
+  onDeleteTask?(): void;
+}> = ({
+  onDeleteTask,
+}) => {
   return (
     <div>
       <ActionDropdown
@@ -18,6 +22,7 @@ const TaskActions: React.FC = () => {
           <ul className="bg-light-gray rounded-md">
             <li className="text-center p-1 px-2 text-[11px]
               rounded-md hover:bg-light-gray-3 cursor-pointer"
+              onClick={onDeleteTask}
             >
               Delete
             </li>

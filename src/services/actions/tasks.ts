@@ -31,8 +31,18 @@ const getAllSample = async (): Promise<Array<{ id: number, name: string }>> => {
   ]
 }
 
+const deleteTask = async (id: number): Promise<any> => {
+  try {
+    const response = await axios.delete(`${env.api.url}/task/${id}/delete`);
+    return response;
+  } catch(error) {
+    console.log('DeleteTaskError', error);
+  }
+}
+
 export default {
   update,
   getAll,
-  getAllSample
+  getAllSample,
+  deleteTask,
 }
