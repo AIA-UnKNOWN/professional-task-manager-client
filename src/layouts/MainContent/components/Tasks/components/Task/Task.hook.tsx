@@ -8,15 +8,9 @@ import { setTasks } from '@services/reducers/tasks';
 const useTask = (props: TaskProps) => {
   const [ tasks ] = useAppSelector(state => [ state.tasks ]);
   const dispatch = useAppDispatch();
-  const { id, title, description, is_completed } = props.data;
   const [isEditMode, setIsEditMode] = useState(false);
   const [saveButtonText, setSaveButtonText] = useState('Save');
-  const [task, setTask] = useState({
-    id,
-    title,
-    description,
-    is_completed,
-  });
+  const [task, setTask] = useState(props.data);
 
   const onChangeHandler: (type: string, value: any) => void = (type, value) => {
     setSaveButtonText('Save');
@@ -33,7 +27,7 @@ const useTask = (props: TaskProps) => {
   const onSaveTask = async (): Promise<void> => {
     setSaveButtonText('Saving...');
     try {
-      const response = await TaskActions.update(id, task);
+      const response = await TaskActions.update(task.id, task);
       if (response.data !== "OK") return;
       setSaveButtonText('Saved!');
       setTimeout(() => {
@@ -48,7 +42,7 @@ const useTask = (props: TaskProps) => {
     const updatedTask = { ...task, is_completed: !task.is_completed };
     setTask(updatedTask);
     try {
-      const response = await TaskActions.update(id, updatedTask);
+      const response = await TaskActions.update(updatedTask.id, updatedTask);
       if (response.data !== "OK") return;
       updateTasksRedux(updatedTask.id, updatedTask);
     } catch(error) {
