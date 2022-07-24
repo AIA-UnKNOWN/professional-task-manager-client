@@ -33,6 +33,11 @@ const PendingTasksList: React.FC<{
           taskCreatedDates.push(taskCreatedDate);
         }
 
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth();
+        const currentDate = new Date().getDate();
+        const dateToday = `${MONTH_NAMES[currentMonth]} ${currentDate}, ${currentYear}`;
+
         return (
           <>
             {taskCreatedDates.map(tcd => tcd.taskId).includes(task.id) && (
@@ -45,7 +50,7 @@ const PendingTasksList: React.FC<{
                   left-[20px] bg-light-gray px-2 text-[14px]
                   text-light-black"
                 >
-                  {taskCreatedDate.date}
+                  {taskCreatedDate.date === dateToday ? 'Today' : taskCreatedDate.date}
                 </span>
               </div>
             )}
