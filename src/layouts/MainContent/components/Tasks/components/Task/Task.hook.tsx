@@ -45,7 +45,7 @@ const useTask = (props: TaskProps) => {
   }
 
   const onChangeTaskStatus = async (): Promise<void> => {
-    const updatedTask = { ...task, is_completed: !is_completed };
+    const updatedTask = { ...task, is_completed: !task.is_completed };
     try {
       const response = await TaskActions.update(id, updatedTask);
       if (response.data !== "OK") return;

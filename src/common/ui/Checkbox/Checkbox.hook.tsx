@@ -5,7 +5,7 @@ const useCheckbox = ({ isCheck }) => {
   
   useEffect(() => {
     setIsChecked(isCheck);
-  }, []);
+  }, [isCheck]);
 
   return {
     isChecked
