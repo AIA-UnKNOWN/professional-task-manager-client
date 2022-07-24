@@ -3,6 +3,18 @@ import axios from 'axios';
 import env from '@env.js';
 import { TaskInterface } from '@layouts/MainContent/components/Tasks/components/Task/Task';
 
+const create = async (projectId: number): Promise<any> => {
+  try {
+    const response = await axios.post(`${env.api.url}/task/create`, {
+      project_id: projectId,
+      title: 'Untitled',
+    });
+    return response; 
+  } catch(error) {
+    console.log('CreateTaskError', error);
+  }
+}
+
 const update = async (id: number, updatedTask: TaskInterface): Promise<any> => {
   try {
     const response = await axios.put(`${env.api.url}/task/${id}/update`, updatedTask);
@@ -41,6 +53,7 @@ const deleteTask = async (id: number): Promise<any> => {
 }
 
 export default {
+  create,
   update,
   getAll,
   getAllSample,
