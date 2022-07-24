@@ -39,7 +39,7 @@ const PendingTasksList: React.FC<{
         const dateToday = `${MONTH_NAMES[currentMonth]} ${currentDate}, ${currentYear}`;
 
         return (
-          <>
+          <React.Fragment key={task.id}>
             {taskCreatedDates.map(tcd => tcd.taskId).includes(task.id) && (
               <div
                 className="relative border-b border-light-black
@@ -58,7 +58,7 @@ const PendingTasksList: React.FC<{
               key={task.id}
               data={task}
             />
-          </>
+          </React.Fragment>
         )}
       )}
     </div>
