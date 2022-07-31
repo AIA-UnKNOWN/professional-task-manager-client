@@ -23,6 +23,7 @@ const Projects: React.FC = () => {
               onAddProject={projectName => createProject({ name: projectName })}
             />
           )}
+          dropdownComponentClassName='z-[1]'
         />
       </div>
       <ProjectsList
