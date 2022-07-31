@@ -10,6 +10,7 @@ module.exports = {
       'light-gray-3': '#D9D9D9',
       'white': '#FFF',
       'light-black': '#5F5F5F',
+      'red': 'rgb(221, 51, 51);',
     }
   },
   plugins: [],
