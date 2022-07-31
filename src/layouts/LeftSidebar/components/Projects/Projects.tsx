@@ -13,18 +13,14 @@ const Projects: React.FC = () => {
     <div>
       <div className="flex text-[25px] justify-between items-center">
         <span className="font-bold">Projects</span>
-        <button
-          onClick={() => null}
-        >
-          <ActionDropdown
-            displayedContentComponent={<FaPlusCircle />}
-            dropdownComponent={(
-              <AddProjectField
-                onAddProject={() => alert('Add project')}
-              />
-            )}
-          />
-        </button>
+        <ActionDropdown
+          displayedContentComponent={<FaPlusCircle />}
+          dropdownComponent={(
+            <AddProjectField
+              onAddProject={projectName => alert('Add project ' + projectName)}
+            />
+          )}
+        />
       </div>
       <ProjectsList />
     </div>
