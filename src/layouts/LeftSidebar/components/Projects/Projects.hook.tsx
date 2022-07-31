@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2'; 
+
 import ProjectActions from '@services/actions/projects';
 import { useAppDispatch, useAppSelector } from "@services/store";
 import { setProjects } from '@services/reducers/projects';
@@ -14,10 +16,31 @@ const useProjects = () => {
   }
 
   const deleteProject = async (projectId: number) => {
-    const { data, status } = await ProjectActions.deleteProject(projectId);
-    if (data !== 'OK' || status !== 200) return;
-    dispatch(setProjects(projects.data.filter(project => project.id !== projectId)));
-    dispatch(setProjectId(null));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async result => {
+      if (result.isConfirmed) {
+        try {
+          const { data, status } = await ProjectActions.deleteProject(projectId);
+          if (data !== 'OK' || status !== 200) return;
+          dispatch(setProjects(projects.data.filter(project => project.id !== projectId)));
+          dispatch(setProjectId(null));
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          );
+        } catch(error) {
+          console.log('DeleteProjectError', error);
+        }
+      }
+    })
   }
 
   return {
