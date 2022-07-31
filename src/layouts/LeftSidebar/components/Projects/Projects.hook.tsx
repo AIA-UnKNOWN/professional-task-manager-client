@@ -1,6 +1,7 @@
 import ProjectActions from '@services/actions/projects';
 import { useAppDispatch, useAppSelector } from "@services/store";
 import { setProjects } from '@services/reducers/projects';
+import { setProjectId } from '@services/reducers/tasks';
 
 const useProjects = () => {
   const [ projects ] = useAppSelector(state => [ state.projects ]);
@@ -16,6 +17,7 @@ const useProjects = () => {
     const { data, status } = await ProjectActions.deleteProject(projectId);
     if (data !== 'OK' || status !== 200) return;
     dispatch(setProjects(projects.data.filter(project => project.id !== projectId)));
+    dispatch(setProjectId(null));
   }
 
   return {
