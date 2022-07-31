@@ -20,7 +20,10 @@ const AddProjectField: React.FC<{
       <button
         className="text-[15px] bg-light-gray-3 w-[60px] h-[34px]
         rounded-md ml-1"
-        onClick={() => onAddProject(projectName)}
+        onClick={() => {
+          onAddProject(projectName);
+          setProjectName('');
+        }}
       >
         Add
       </button>
