@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 import { useAppSelector, useAppDispatch } from '@services/store';
 
 import { TaskProps, TaskInterface } from './Task';
@@ -72,13 +73,30 @@ const useTask = (props: TaskProps) => {
   }
 
   const deleteTask = async (): Promise<void> => {
-    try {
-      const response = await TaskActions.deleteTask(task.id);
-      if (response.data !== "OK") return;
-      updateTasksRedux(task.id, task, 'delete');
-    } catch(error) {
-      console.log('DeleteTaskError', error);
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async result => {
+      if (result.isConfirmed) {
+        try {
+          const response = await TaskActions.deleteTask(task.id);
+          if (response.data !== "OK") return;
+          updateTasksRedux(task.id, task, 'delete');
+          Swal.fire(
+            'Deleted!',
+            'Task has been deleted.',
+            'success'
+          )
+        } catch(error) {
+          console.log('DeleteTaskError', error);
+        }
+      }
+    })
   }
 
   return {
