@@ -7,7 +7,9 @@ import ProjectsList from './components/ProjectsList';
 import AddProjectField from './components/AddProjectField';
 
 const Projects: React.FC = () => {
-  useProjects();
+  const {
+    createProject,
+  } = useProjects();
 
   return (
     <div>
@@ -17,7 +19,7 @@ const Projects: React.FC = () => {
           displayedContentComponent={<FaPlusCircle />}
           dropdownComponent={(
             <AddProjectField
-              onAddProject={projectName => alert('Add project ' + projectName)}
+              onAddProject={projectName => createProject({ name: projectName })}
             />
           )}
         />
