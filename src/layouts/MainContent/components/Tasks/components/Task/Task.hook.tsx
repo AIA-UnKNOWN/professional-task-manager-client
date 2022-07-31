@@ -33,7 +33,7 @@ const useTask = (props: TaskProps) => {
       setSaveButtonText('Saved!');
       setTimeout(() => {
         setIsEditMode(!isEditMode);
-      }, 1000);
+      }, 200);
     } catch(error) {
       console.log('onSaveTaskError', error);
     }
