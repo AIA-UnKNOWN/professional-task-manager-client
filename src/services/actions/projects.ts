@@ -19,7 +19,17 @@ const getAllSample = async (): Promise<Array<{ id: number, name: string }>> => {
   ]
 }
 
+const create = async (project): Promise<any> => {
+  try {
+    const response = await axios.post(`${env.api.url}/project/create`, project);
+    return response;
+  } catch(error) {
+    console.log('CreateProjectError', error);
+  }
+}
+
 export default {
   getAll,
-  getAllSample
+  getAllSample,
+  create,
 }
