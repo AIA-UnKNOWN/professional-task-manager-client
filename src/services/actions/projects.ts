@@ -28,8 +28,18 @@ const create = async (project): Promise<any> => {
   }
 }
 
+const deleteProject = async (projectId: number): Promise<any> => {
+  try {
+    const response = await axios.delete(`${env.api.url}/project/${projectId}/delete`);
+    return response;
+  } catch(error) {
+    console.log('DeleteProjectError', error);
+  }
+}
+
 export default {
   getAll,
   getAllSample,
   create,
+  deleteProject,
 }
