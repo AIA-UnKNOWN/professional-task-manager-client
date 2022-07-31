@@ -3,7 +3,11 @@ import React from 'react';
 
 import useProjectsList from './ProjectsList.hook';
 
-const ProjectsList: React.FC = () => {
+const ProjectsList: React.FC<{
+  onDeleteProject(projectId: number): void;
+}> = ({
+  onDeleteProject,
+}) => {
   const {
     projects,
     selectedProjectId,
@@ -38,7 +42,7 @@ const ProjectsList: React.FC = () => {
           >
             <button
               className='bg-red text-white px-2 py-1 rounded-md text-[14px] ml-2'
-              onClick={() => console.log('delete', project.id)}
+              onClick={() => onDeleteProject(project.id)}
             >
               Delete
             </button>

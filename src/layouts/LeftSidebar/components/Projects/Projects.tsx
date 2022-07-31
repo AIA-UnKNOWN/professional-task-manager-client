@@ -9,6 +9,7 @@ import AddProjectField from './components/AddProjectField';
 const Projects: React.FC = () => {
   const {
     createProject,
+    deleteProject,
   } = useProjects();
 
   return (
@@ -24,7 +25,9 @@ const Projects: React.FC = () => {
           )}
         />
       </div>
-      <ProjectsList />
+      <ProjectsList
+        onDeleteProject={deleteProject}
+      />
     </div>
   );
 }

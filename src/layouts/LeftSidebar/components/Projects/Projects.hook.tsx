@@ -12,8 +12,15 @@ const useProjects = () => {
     dispatch(setProjects([ ...projects.data, data.createdProject ]));
   }
 
+  const deleteProject = async (projectId: number) => {
+    const { data, status } = await ProjectActions.deleteProject(projectId);
+    if (data !== 'OK' || status !== 200) return;
+    dispatch(setProjects(projects.data.filter(project => project.id !== projectId)));
+  }
+
   return {
     createProject,
+    deleteProject,
   }
 }
 
