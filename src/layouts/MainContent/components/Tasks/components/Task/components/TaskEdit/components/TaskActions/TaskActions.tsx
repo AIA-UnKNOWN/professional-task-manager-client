@@ -1,11 +1,10 @@
 import React from 'react';
 import { FaEllipsisH } from 'react-icons/fa';
 
+import { TaskActionsInterface } from '@constants/interfaces';
 import ActionDropdown from '@common/ui/ActionDropdown';
 
-const TaskActions: React.FC<{
-  onDeleteTask?(): void;
-}> = ({
+const TaskActions: React.FC<TaskActionsInterface> = ({
   onDeleteTask,
 }) => {
   return (

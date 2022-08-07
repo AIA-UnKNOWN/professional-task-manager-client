@@ -1,10 +1,9 @@
 import React from 'react';
 
-import Task, { TaskInterface } from '@layouts/MainContent/components/Tasks/components/Task';
+import { PendingTasksListInterface, TaskInterface } from '@constants/interfaces';
+import Task from '@layouts/MainContent/components/Tasks/components/Task';
 
-const PendingTasksList: React.FC<{
-  tasks: Array<TaskInterface>;
-}> = ({
+const PendingTasksList: React.FC<PendingTasksListInterface> = ({
   tasks,
 }) => {
   let taskCreatedDates: Array<{ date: string, taskId: number }> = [];

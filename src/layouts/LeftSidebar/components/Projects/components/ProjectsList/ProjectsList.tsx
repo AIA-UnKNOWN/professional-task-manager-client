@@ -2,10 +2,9 @@ import './ProjectsList.css';
 import React from 'react';
 
 import useProjectsList from './ProjectsList.hook';
+import { ProjectsListInterface } from 'constants/interfaces';
 
-const ProjectsList: React.FC<{
-  onDeleteProject(projectId: number): void;
-}> = ({
+const ProjectsList: React.FC<ProjectsListInterface> = ({
   onDeleteProject,
 }) => {
   const {

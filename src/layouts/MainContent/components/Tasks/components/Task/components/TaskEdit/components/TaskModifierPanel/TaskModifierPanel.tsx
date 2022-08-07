@@ -1,11 +1,9 @@
 import React from 'react';
 import { FaFlag, FaTags } from 'react-icons/fa';
 
-const TaskModifierPanel: React.FC<{
-  saveButtonText?: string;
-  onCancel: () => void;
-  onSave: () => void;
-}> = ({
+import { TaskModifierPanelInterface } from '@constants/interfaces';
+
+const TaskModifierPanel: React.FC<TaskModifierPanelInterface> = ({
   saveButtonText,
   onCancel,
   onSave,

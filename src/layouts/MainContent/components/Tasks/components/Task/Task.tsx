@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
 import { FaAngleDown } from 'react-icons/fa';
 
+import { TaskProps } from 'constants/interfaces';
 import useTask from './Task.hook';
 import Container from '@common/Container';
 import TaskEdit from './components/TaskEdit';
 import Checkbox from '@common/ui/Checkbox';
-
-export interface TaskInterface {
-  id: number;
-  is_completed: boolean;
-  title: string;
-  description: string;
-}
-
-export interface TaskProps {
-  data: TaskInterface;
-}
 
 const Task: React.FC<TaskProps> = props => {
   const {

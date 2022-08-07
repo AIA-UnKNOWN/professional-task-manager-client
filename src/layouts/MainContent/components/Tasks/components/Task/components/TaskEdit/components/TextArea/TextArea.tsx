@@ -1,11 +1,6 @@
 import React from 'react';
 
-import { TaskInterface } from '@layouts/MainContent/components/Tasks/components/Task';
-
-interface TextAreaProps {
-  task: TaskInterface;
-  onChangeHandler: (type: string, value: string) => void;
-}
+import { TextAreaProps } from '@constants/interfaces';
 
 const TextArea: React.FC<TextAreaProps> = ({
   task,

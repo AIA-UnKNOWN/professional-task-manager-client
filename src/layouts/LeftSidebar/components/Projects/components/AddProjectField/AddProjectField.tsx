@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-const AddProjectField: React.FC<{
-  onAddProject(projectName: string): void;
-}> = ({
+import { AddProjectFieldInterface } from '@constants/interfaces';
+
+const AddProjectField: React.FC<AddProjectFieldInterface> = ({
   onAddProject
 }) => {
   const [projectName, setProjectName] = useState('');

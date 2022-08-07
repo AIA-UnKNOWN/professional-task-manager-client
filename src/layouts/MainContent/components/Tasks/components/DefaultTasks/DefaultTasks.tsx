@@ -1,15 +1,12 @@
 import React from 'react';
 import { FaPlusCircle } from 'react-icons/fa';
 
+import { DefaultTasksInterface } from '@constants/interfaces';
 import useDefaultTasks from './DefaultTasks.hook';
 import Container from '@common/Container';
 import DefaultTasksList from './components/DefaultTasksList';
-import { TaskInterface } from '@layouts/MainContent/components/Tasks/components/Task';
 
-const DefaultTasks: React.FC<{
-  title: string;
-  tasks: Array<TaskInterface>;
-}> = ({
+const DefaultTasks: React.FC<DefaultTasksInterface> = ({
   title,
   tasks,
 }) => {

@@ -1,18 +1,10 @@
 import React from 'react';
 
 import Checkbox from '@common/ui/Checkbox';
-import { TaskInterface } from '@layouts/MainContent/components/Tasks/components/Task';
+import { TaskEditInterface, TaskInterface } from 'constants/interfaces';
 import { TextArea, TaskModifierPanel, TaskActions } from './components';
 
-const TaskEdit: React.FC<{
-  data: TaskInterface;
-  onCancelTask: () => void;
-  saveButtonText?: string;
-  onSaveTask: () => void;
-  onChangeHandler: (type: string, value: string) => void;
-  onChangeTaskStatus(): void;
-  onDeleteTask?(): void;
-}> = ({
+const TaskEdit: React.FC<TaskEditInterface> = ({
   data,
   onCancelTask,
   saveButtonText,
