@@ -20,6 +20,7 @@ const config = {
       '@common': resolve(__dirname, 'src/common'),
       '@layouts': resolve(__dirname, 'src/layouts'),
       '@services': resolve(__dirname, 'src/services'),
+      '@constants': resolve(__dirname, 'src/constants'),
     }
   },
   module: {
