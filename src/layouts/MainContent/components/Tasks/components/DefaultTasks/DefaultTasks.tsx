@@ -23,7 +23,7 @@ const DefaultTasks: React.FC<DefaultTasksInterface> = ({
           <FaPlusCircle />
         </span>
       </div>
-      {tasks.length > 0 ? (
+      {tasks?.length > 0 ? (
         <DefaultTasksList tasks={tasks} />
       ) : (
         <Container className="flex justify-center items-center

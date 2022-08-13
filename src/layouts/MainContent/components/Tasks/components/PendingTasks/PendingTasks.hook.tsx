@@ -12,7 +12,7 @@ const usePendingTasks = () => {
   }, [tasks.projectId, tasks.data]);
 
   const getAllTasks = (): void => {
-    const pendingTasks = tasks.data.filter(task => !task.is_completed);
+    const pendingTasks = tasks.data?.filter(task => !task.is_completed);
     setPendingTasks(pendingTasks);
   }
 

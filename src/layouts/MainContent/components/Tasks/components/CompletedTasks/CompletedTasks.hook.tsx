@@ -10,7 +10,7 @@ const useCompletedTasks = () => {
   }, [tasks.projectId, tasks.data]);
 
   const getAllCompletedTasks = (): void => {
-    const completedTasks = tasks.data.filter(task => task.is_completed);
+    const completedTasks = tasks.data?.filter(task => task.is_completed);
     setCompletedTasks(completedTasks);
   }
 
