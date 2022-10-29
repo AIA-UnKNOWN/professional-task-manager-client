@@ -1,0 +1,8 @@
+services:
+  professional-task-manager-client:
+    image: professional-task-manager-client-image
+    container_name: task-manager-client
+    ports:
+      - 9000:9000
+    volumes:
+      - ./:/app
