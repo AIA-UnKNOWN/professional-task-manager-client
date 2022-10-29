@@ -9,6 +9,7 @@ import AddLabelField from './components/AddLabelField';
 const Labels: React.FC = () => {
   const {
     createLabel,
+    deleteLabel,
   } = useLabels();
 
   return (
@@ -25,7 +26,9 @@ const Labels: React.FC = () => {
           dropdownComponentClassName='z-[1]'
         />
       </div>
-      <LabelsList />
+      <LabelsList
+        onDeleteLabel={deleteLabel}
+      />
     </div>
   );
 }

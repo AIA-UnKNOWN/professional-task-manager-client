@@ -20,6 +20,15 @@ const create = async (label) : Promise<any> => {
   }
 }
 
+const deleteLabel = async (labelId: number) : Promise<any> => {
+  try {
+    const response = await axios.delete(`${env.api.url}/label/${labelId}/delete`);
+    return response;
+  } catch(error) {
+    console.log('DeleteProjectError', error);
+  }
+}
+
 const getAllSample = async (): Promise<Array<{ id: number, name: string }>> => {
   return [
     { id: 1, name: 'Label 1' },
@@ -32,4 +41,5 @@ export default {
   getAll,
   getAllSample,
   create,
+  deleteLabel,
 }
