@@ -5,6 +5,8 @@ import useLabelsList from './LabelsList.hook';
 const LabelsList: React.FC = () => {
   const { labels } = useLabelsList();
 
+  if (!labels.length) return null;
+
   return (
     <div className="my-2">
       {labels.map(label => (
