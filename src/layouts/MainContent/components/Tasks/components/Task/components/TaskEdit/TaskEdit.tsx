@@ -3,6 +3,7 @@ import React from 'react';
 import Checkbox from '@common/ui/Checkbox';
 import { TaskEditInterface, TaskInterface } from 'constants/interfaces';
 import { TextArea, TaskModifierPanel, TaskActions } from './components';
+import useTaskEdit from './TaskEdit.hook';
 
 const TaskEdit: React.FC<TaskEditInterface> = ({
   data,
@@ -16,6 +17,9 @@ const TaskEdit: React.FC<TaskEditInterface> = ({
   const {
     is_completed,
   } = data;
+  const {
+    setTaskLabelByLabelId,
+  } = useTaskEdit();
 
   return (
     <div className="flex flex-col w-full">
@@ -34,9 +38,11 @@ const TaskEdit: React.FC<TaskEditInterface> = ({
         />
       </div>
       <TaskModifierPanel
+        data={data}
         saveButtonText={saveButtonText}
         onCancel={onCancelTask}
         onSave={onSaveTask}
+        setTaskLabelByLabelId={labelId => setTaskLabelByLabelId(labelId, data)}
       />
     </div>
   );
