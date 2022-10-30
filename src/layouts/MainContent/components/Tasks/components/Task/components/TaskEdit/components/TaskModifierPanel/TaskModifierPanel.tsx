@@ -60,7 +60,7 @@ const TaskModifierPanel: React.FC<TaskModifierPanelInterface> = ({
                       {label.name}
                     </span>
                     <Checkbox
-                      isCheck={task.label_id === label.id}
+                      isCheck={task?.label_id === label.id || false}
                       onChange={value => setTaskLabelByLabelId(label.id)}
                     />
                   </li>
