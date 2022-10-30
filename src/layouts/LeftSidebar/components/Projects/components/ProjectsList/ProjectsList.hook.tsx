@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from "@services/store";
 import ProjectsActions from '@services/actions/projects';
 import { setProjects } from '@services/reducers/projects';
 import { setProjectId } from '@services/reducers/tasks';
+import { setTasks } from '@services/reducers/tasks';
 
 const useProjectsList = () => {
   const [
@@ -26,6 +27,8 @@ const useProjectsList = () => {
 
   const selectProjectById = (id: number) => {
     dispatch(setProjectId(id));
+    const project = projects?.find(project => project.id === id) || null;
+    dispatch(setTasks(project?.tasks || []));
   }
 
   return {

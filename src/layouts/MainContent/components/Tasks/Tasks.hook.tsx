@@ -11,7 +11,7 @@ const useTask = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getAllTasks();
+    // getAllTasks();
   }, [tasks.projectId]);
 
   const getAllTasks = async (): Promise<void> => {
