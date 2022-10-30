@@ -20,7 +20,7 @@ const ProjectsList: React.FC<ProjectsListInterface> = ({
   return (
     <div className="my-2">
       {projects.map(project => {
-        const pendingTasksCount = tasks?.data?.filter(task => task.project_id === project.id && !task.is_completed)?.length || 0;
+        const pendingTasksCount = project?.tasks?.filter(task => !task.is_completed)?.length || 0;
         return (
           <div
             key={project.id}
