@@ -6,41 +6,49 @@ import useLabelsList from './LabelsList.hook';
 const LabelsList: React.FC = ({
   onDeleteLabel,
 }) => {
-  const { labels } = useLabelsList();
+  const {
+    labels,
+    projects,
+    setNavigationById,
+  } = useLabelsList();
 
   if (!labels.length) return null;
 
   return (
     <div className="my-2">
-      {labels.map(label => (
-        <div
-          className="label mb-1 last-of-type:mb-0 relative"
-          key={label.id}
-        >
+      {labels.map((label, index) => {
+        const navigationId = projects.length + index;
+         return (
           <div
-            className="bg-light-gray rounded-[10px] text-[15px] w-[211px] h-[34px]
-            flex justify-between items-center px-4 cursor-pointer
-            hover:bg-light-gray-3"
+            className="label mb-1 last-of-type:mb-0 relative"
+            key={label.id}
+            onClick={() => setNavigationById(navigationId)}
           >
-            <span>
-              {label.name}
-            </span>
-            <span className="font-bold">
-              0
-            </span>
-          </div>
-          <div
-            className={`delete-button absolute top-[50%] left-[100%] -translate-y-[50%]`}
-          >
-            <button
-              className='bg-red text-white px-2 py-1 rounded-md text-[14px] ml-2'
-              onClick={() => onDeleteLabel(label.id)}
+            <div
+              className="bg-light-gray rounded-[10px] text-[15px] w-[211px] h-[34px]
+              flex justify-between items-center px-4 cursor-pointer
+              hover:bg-light-gray-3"
             >
-              Delete
-            </button>
+              <span>
+                {label.name}
+              </span>
+              <span className="font-bold">
+                0
+              </span>
+            </div>
+            <div
+              className={`delete-button absolute top-[50%] left-[100%] -translate-y-[50%]`}
+            >
+              <button
+                className='bg-red text-white px-2 py-1 rounded-md text-[14px] ml-2'
+                onClick={() => onDeleteLabel(label.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   );
 }

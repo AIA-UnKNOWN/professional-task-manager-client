@@ -3,10 +3,15 @@ import { useAppSelector, useAppDispatch } from '@services/store';
 
 import { setLabels } from '@services/reducers/labels';
 import LabelsActions from '@services/actions/labels';
+import { setNavigationId } from '@services/reducers/navigation';
 
 const useLabelsList = () => {
-  const [ labels ] = useAppSelector(state => [
+  const [
+    labels,
+    projects,
+  ] = useAppSelector(state => [
     state.labels.data,
+    state.projects.data,
   ]);
   const dispatch = useAppDispatch();
 
@@ -24,8 +29,16 @@ const useLabelsList = () => {
     }
   }
 
+  const setNavigationById = (id: number) => {
+    dispatch(setNavigationId(id));
+  }
+
   return {
+    // states
     labels,
+    projects,
+    // reducers
+    setNavigationById,
   }
 }
 

@@ -12,19 +12,20 @@ const ProjectsList: React.FC<ProjectsListInterface> = ({
     projects,
     selectedProjectId,
     selectProjectById,
+    setNavigationById,
   } = useProjectsList();
-  const [tasks] = useAppSelector(state => [state.tasks]);
 
   if (projects && projects.length === 0) return null;
 
   return (
     <div className="my-2">
-      {projects.map(project => {
+      {projects.map((project, index) => {
         const pendingTasksCount = project?.tasks?.filter(task => !task.is_completed)?.length || 0;
         return (
           <div
             key={project.id}
             className='project mb-1 last-of-type:mb-0 relative'
+            onClick={() => setNavigationById(index)}
           >
             <div
               className={`${project.id === selectedProjectId ? 'bg-light-gray-3' : 'bg-light-gray'}

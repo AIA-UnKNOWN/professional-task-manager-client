@@ -5,6 +5,7 @@ import ProjectsActions from '@services/actions/projects';
 import { setProjects } from '@services/reducers/projects';
 import { setProjectId } from '@services/reducers/tasks';
 import { setTasks } from '@services/reducers/tasks';
+import { setNavigationId } from '@services/reducers/navigation';
 
 const useProjectsList = () => {
   const [
@@ -31,10 +32,18 @@ const useProjectsList = () => {
     dispatch(setTasks(project?.tasks || []));
   }
 
+  const setNavigationById = (id: number) => {
+    dispatch(setNavigationId(id));
+  }
+
   return {
+    // states
     projects,
+    // functions
     selectedProjectId,
     selectProjectById,
+    // reducers
+    setNavigationById,
   }
 }
 
