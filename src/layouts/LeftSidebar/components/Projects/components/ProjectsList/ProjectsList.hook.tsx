@@ -11,10 +11,10 @@ import navigationCategories from '@constants/navigation-categories';
 const useProjectsList = () => {
   const [
     projects,
-    selectedProjectId,
+    navigation,
   ] = useAppSelector(state => [
     state.projects.data,
-    state.tasks.projectId,
+    state.navigation,
   ]);
   const dispatch = useAppDispatch();
 
@@ -40,8 +40,8 @@ const useProjectsList = () => {
   return {
     // states
     projects,
+    navigation,
     // functions
-    selectedProjectId,
     selectProjectById,
     // reducers
     setNavigationById,

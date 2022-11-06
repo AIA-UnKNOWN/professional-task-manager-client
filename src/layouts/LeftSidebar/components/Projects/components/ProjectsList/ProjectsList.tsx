@@ -9,9 +9,12 @@ const ProjectsList: React.FC<ProjectsListInterface> = ({
   onDeleteProject,
 }) => {
   const {
+    // states
     projects,
-    selectedProjectId,
+    navigation,
+    // functions
     selectProjectById,
+    // reducers
     setNavigationById,
   } = useProjectsList();
 
@@ -28,9 +31,12 @@ const ProjectsList: React.FC<ProjectsListInterface> = ({
             onClick={() => setNavigationById(project.id)}
           >
             <div
-              className={`${project.id === selectedProjectId ? 'bg-light-gray-3' : 'bg-light-gray'}
-                rounded-[10px] text-[15px] w-[211px] h-[34px] flex justify-between items-center px-4 cursor-pointer
-                hover:bg-light-gray-3 ${project.id === selectedProjectId &&`bg-light-gray-3`}
+              className={`
+                rounded-[10px] text-[15px] w-[211px] h-[34px] flex justify-between
+                items-center px-4 cursor-pointer hover:bg-light-gray-3
+                ${project.id === navigation.id && navigation.categoryName === 'PROJECT'
+                  ? 'bg-light-gray-3'
+                  : 'bg-light-gray'}
               `}
               onClick={() => selectProjectById(project.id)}
             >

@@ -7,7 +7,10 @@ const LabelsList: React.FC = ({
   onDeleteLabel,
 }) => {
   const {
+    // states
     labels,
+    navigation,
+    // reducers
     setNavigationById,
   } = useLabelsList();
 
@@ -23,9 +26,13 @@ const LabelsList: React.FC = ({
             onClick={() => setNavigationById(label.id)}
           >
             <div
-              className="bg-light-gray rounded-[10px] text-[15px] w-[211px] h-[34px]
-              flex justify-between items-center px-4 cursor-pointer
-              hover:bg-light-gray-3"
+              className={`
+                rounded-[10px] text-[15px] w-[211px] h-[34px] flex justify-between
+                items-center px-4 cursor-pointer hover:bg-light-gray-3
+                ${label.id === navigation.id && navigation.categoryName === 'LABEL'
+                  ? 'bg-light-gray-3'
+                  : 'bg-light-gray'}
+              `}
             >
               <span>
                 {label.name}

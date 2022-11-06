@@ -10,9 +10,11 @@ const useLabelsList = () => {
   const [
     labels,
     projects,
+    navigation,
   ] = useAppSelector(state => [
     state.labels.data,
     state.projects.data,
+    state.navigation,
   ]);
   const dispatch = useAppDispatch();
 
@@ -38,6 +40,7 @@ const useLabelsList = () => {
     // states
     labels,
     projects,
+    navigation,
     // reducers
     setNavigationById,
   }
