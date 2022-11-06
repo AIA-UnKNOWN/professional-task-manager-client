@@ -2,14 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface NavigationState {
   id: number | null,
+  categoryName: string,
 }
 
 interface Action {
-  payload: number | null,
+  payload: {
+    id: number | null,
+    categoryName: string,
+  }
 }
 
 const initialState: NavigationState = {
   id: null,
+  categoryName: '',
 }
 
 const navigationSlice = createSlice({
@@ -17,7 +22,11 @@ const navigationSlice = createSlice({
   initialState,
   reducers: {
     setNavigationId: (state: NavigationState, action: Action) => {
-      state.id = action.payload;
+      return {
+        ...state,
+        id: action.payload.id,
+        categoryName: action.payload.categoryName,
+      }
     },
   }
 });

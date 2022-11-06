@@ -19,13 +19,13 @@ const ProjectsList: React.FC<ProjectsListInterface> = ({
 
   return (
     <div className="my-2">
-      {projects.map((project, index) => {
+      {projects.map(project => {
         const pendingTasksCount = project?.tasks?.filter(task => !task.is_completed)?.length || 0;
         return (
           <div
             key={project.id}
             className='project mb-1 last-of-type:mb-0 relative'
-            onClick={() => setNavigationById(index)}
+            onClick={() => setNavigationById(project.id)}
           >
             <div
               className={`${project.id === selectedProjectId ? 'bg-light-gray-3' : 'bg-light-gray'}

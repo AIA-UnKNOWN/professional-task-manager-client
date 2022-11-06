@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '@services/store';
 import { setLabels } from '@services/reducers/labels';
 import LabelsActions from '@services/actions/labels';
 import { setNavigationId } from '@services/reducers/navigation';
+import navigationCategories from '@constants/navigation-categories';
 
 const useLabelsList = () => {
   const [
@@ -30,7 +31,7 @@ const useLabelsList = () => {
   }
 
   const setNavigationById = (id: number) => {
-    dispatch(setNavigationId(id));
+    dispatch(setNavigationId({ id, categoryName: navigationCategories.LABEL }));
   }
 
   return {

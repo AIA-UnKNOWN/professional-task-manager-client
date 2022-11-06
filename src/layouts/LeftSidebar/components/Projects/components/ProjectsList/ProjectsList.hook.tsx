@@ -6,6 +6,7 @@ import { setProjects } from '@services/reducers/projects';
 import { setProjectId } from '@services/reducers/tasks';
 import { setTasks } from '@services/reducers/tasks';
 import { setNavigationId } from '@services/reducers/navigation';
+import navigationCategories from '@constants/navigation-categories';
 
 const useProjectsList = () => {
   const [
@@ -33,7 +34,7 @@ const useProjectsList = () => {
   }
 
   const setNavigationById = (id: number) => {
-    dispatch(setNavigationId(id));
+    dispatch(setNavigationId({ id, categoryName: navigationCategories.PROJECT }));
   }
 
   return {

@@ -8,7 +8,6 @@ const LabelsList: React.FC = ({
 }) => {
   const {
     labels,
-    projects,
     setNavigationById,
   } = useLabelsList();
 
@@ -16,13 +15,12 @@ const LabelsList: React.FC = ({
 
   return (
     <div className="my-2">
-      {labels.map((label, index) => {
-        const navigationId = projects.length + index;
-         return (
+      {labels.map(label => {
+        return (
           <div
             className="label mb-1 last-of-type:mb-0 relative"
             key={label.id}
-            onClick={() => setNavigationById(navigationId)}
+            onClick={() => setNavigationById(label.id)}
           >
             <div
               className="bg-light-gray rounded-[10px] text-[15px] w-[211px] h-[34px]
