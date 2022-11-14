@@ -5,39 +5,27 @@ import { PendingTasksListInterface, TaskInterface } from '@constants/interfaces'
 import Task from '@layouts/MainContent/components/Tasks/components/Task';
 import { Timeline } from './components';
 
-const DefaultTasksList: React.FC<PendingTasksListInterface> = ({
-  tasks,
-}) => {
+const DefaultTasksList: React.FC<PendingTasksListInterface> = props => {
   const {
-    // variables
-    taskCreatedDates,
+    // states
+    tasksList,
     // functions
-    groupTasksByCreatedDate,
     getDateToday,
-  } = useDefaultTasksList();
+  } = useDefaultTasksList(props);
 
   return (
     <div className="mt-5">
-      {tasks.map((task: TaskInterface) => {
-        const taskCreatedDate = groupTasksByCreatedDate(task);
-
-        return (
-          <React.Fragment key={task.id}>
-            {taskCreatedDates.map(tcd => tcd.taskId).includes(task.id) && (
-              <Timeline
-                date={taskCreatedDate.date === getDateToday()
-                  ? 'Today'
-                  : taskCreatedDate.date
-                }
-              />
-            )}
+      {tasksList.map((taskList, i) => (
+        <React.Fragment key={i}>
+          <Timeline date={taskList.date === getDateToday() ? 'Today' : taskList.date} />
+          {taskList.tasks.map(task => (
             <Task
               key={task.id}
               data={task}
             />
-          </React.Fragment>
-        )
-      })}
+          ))}
+        </React.Fragment>
+      ))}
     </div>
   );
 }

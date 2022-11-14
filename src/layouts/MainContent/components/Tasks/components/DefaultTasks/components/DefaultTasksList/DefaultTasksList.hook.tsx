@@ -1,34 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const useDefaultTasksList = () => {
+const useDefaultTasksList = props => {
+  const { tasks } = props;
   const MONTH_NAMES = [
     'January', 'February', 'March', 'April',
     'May', 'June', 'July', 'August',
     'September', 'October', 'November', 'December'
   ];
-  const [taskCreatedDates, setTaskCreatedDates] = useState([]);
+  const [tasksList, setTasksList] = useState([])
 
-  const groupTasksByCreatedDate = task => {
-    const taskCreatedAt = new Date(task.createdAt);
-    const year = taskCreatedAt.getFullYear();
-    const month = taskCreatedAt.getMonth();
-    const date = taskCreatedAt.getDate();
+  useEffect(() => {
+    let tasksList = organizeTasksList();
+    tasksList = tasksList.map(taskList => {
+      return {
+        ...taskList,
+        tasks: tasks.filter(task => {
+          const formattedTaskCreatedDate = formatDate(task.createdAt);
+          return taskList.date === formattedTaskCreatedDate;
+        })
+      }
+    });
+    setTasksList(tasksList);
+  }, [tasks]);
 
-    let createdDate = `${MONTH_NAMES[month]} ${date}, ${year}`;
-    const taskCreatedDate = {
-      date: createdDate,
-      taskId: task.id,
-    };
-
-    const taskCreatedDatesWithoutTaskIds = taskCreatedDates.map(tcd => tcd.date);
-    if (!taskCreatedDatesWithoutTaskIds.includes(taskCreatedDate.date)) {
-      setTaskCreatedDates([taskCreatedDate, ...taskCreatedDates]);
+  const organizeTasksList = () => {
+    let tasksList = [];
+    for (const task of tasks) {
+      // formats the created date of a task into human readable format
+      const formattedTaskCreatedDate = formatDate(task.createdAt);
+      // gets all the task created dates to be used in checking for duplicate dates
+      // which will be used in grouping tasks by created date
+      const tasksListDates = tasksList.map(taskList => taskList.date);
+      // checks if the formatted task created date is not in the filtered dates
+      // so that we can add that date
+      if (!tasksListDates.includes(formattedTaskCreatedDate)) {
+        tasksList = [...tasksList, {
+          date: formattedTaskCreatedDate,
+          tasks: [],
+        }];
+      }
     }
-
-    return taskCreatedDate;
+    return tasksList;
   }
 
-  const getDateToday = () => {
+  const formatDate = (date: Date) : string => {
+    const monthIndex = new Date(date).getMonth();
+    const dateNumber = new Date(date).getDate();
+    const year = new Date(date).getFullYear();
+    return `${MONTH_NAMES[monthIndex]} ${dateNumber}, ${year}`;
+  }
+
+  const getDateToday = () : string => {
     const currentMonth = new Date().getMonth();
     const currentDate = new Date().getDate();
     const currentYear = new Date().getFullYear();
@@ -36,10 +58,9 @@ const useDefaultTasksList = () => {
   }
 
   return {
-    // variables
-    taskCreatedDates,
+    // states
+    tasksList,
     // functions
-    groupTasksByCreatedDate,
     getDateToday,
   }
 }
