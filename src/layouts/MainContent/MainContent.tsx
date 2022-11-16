@@ -16,7 +16,7 @@ const MainContent: React.FC = () => {
   const currentProject = projects.data.find(p => p.id === tasks.projectId);
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 overflow-y-auto pb-10">
       <p className="text-[30px] font-bold text-center my-10">
         {currentProject && currentProject.name || 'No project title'}
       </p>
