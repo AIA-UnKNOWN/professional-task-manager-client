@@ -20,7 +20,11 @@ const useDefaultTasksList = props => {
         })
       }
     });
-    setTasksList(tasksList);
+    setTasksList(
+      tasksList.sort((taskList1, taskList2) => {
+        return new Date(taskList2.date).getTime() - new Date(taskList1.date).getTime()
+      })
+    );
   }, [tasks]);
 
   const organizeTasksList = () => {
