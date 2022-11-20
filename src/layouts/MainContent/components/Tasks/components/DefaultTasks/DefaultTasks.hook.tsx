@@ -2,10 +2,17 @@ import { useAppSelector, useAppDispatch } from "@services/store";
 
 import TaskActions from "@services/actions/tasks";
 import { setTasks } from "@services/reducers/tasks";
+import { setProjects } from "@services/reducers/projects";
 import { TaskInterface } from "@layouts/MainContent/components/Tasks/components/Task";
 
 const useDefaultTasks = () => {
-  const [ tasks ] = useAppSelector(state => [ state.tasks ]);
+  const [
+    tasks,
+    projects,
+  ] = useAppSelector(state => [
+    state.tasks,
+    state.projects,
+  ]);
   const dispatch = useAppDispatch();
 
   const createTask = async (): Promise<void> => {
@@ -22,6 +29,14 @@ const useDefaultTasks = () => {
   const appendNewTaskToRedux = (newTask: TaskInterface): void => {
     const newTasks = [ newTask, ...tasks.data ];
     dispatch(setTasks(newTasks));
+    const updatedProjects = projects.data.map(project => {
+      if (project.id !== newTask.project_id) return project;
+      return {
+        ...project,
+        tasks: [ ...project.tasks, newTask ]
+      };
+    });
+    dispatch(setProjects(updatedProjects));
   }
 
   return {
