@@ -5,9 +5,16 @@ import { useAppSelector, useAppDispatch } from '@services/store';
 import { TaskProps, TaskInterface } from './Task';
 import TaskActions from '@services/actions/tasks';
 import { setTasks } from '@services/reducers/tasks';
+import { setProjects } from '@services/reducers/projects';
 
 const useTask = (props: TaskProps) => {
-  const [ tasks ] = useAppSelector(state => [ state.tasks ]);
+  const [
+    tasks,
+    projects,
+  ] = useAppSelector(state => [
+    state.tasks,
+    state.projects,
+  ]);
   const dispatch = useAppDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
   const [saveButtonText, setSaveButtonText] = useState('Save');
@@ -31,6 +38,7 @@ const useTask = (props: TaskProps) => {
       const response = await TaskActions.update(task.id, task);
       if (response.data !== "OK") return;
       setSaveButtonText('Saved!');
+      updateProjectsRedux(task);
       setTimeout(() => {
         setIsEditMode(!isEditMode);
       }, 200);
@@ -97,6 +105,19 @@ const useTask = (props: TaskProps) => {
         }
       }
     })
+  }
+
+  const updateProjectsRedux = (task) => {
+    dispatch(setProjects(projects.data.map(project => {
+      if (task.project_id !== project.id) return project;
+      return {
+        ...project,
+        tasks: project.tasks.map(projectTask => {
+          if (projectTask.id !== task.id) return projectTask;
+          return task;
+        }),
+      }
+    })));
   }
 
   return {
