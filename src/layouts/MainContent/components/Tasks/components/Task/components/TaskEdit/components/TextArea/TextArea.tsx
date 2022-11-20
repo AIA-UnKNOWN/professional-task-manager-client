@@ -1,4 +1,6 @@
+import './TextArea.css';
 import React from 'react';
+import ReactQuill from 'react-quill';
 
 import { TextAreaProps } from '@constants/interfaces';
 
@@ -7,7 +9,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   onChangeHandler
 }) => {
   return (
-    <div className="flex-1 mx-4">
+    <div className="textarea flex-1 mx-4">
       <div className="flex flex-col">
         <input
           className="placeholder:text-[14px] bg-light-gray-2
@@ -17,16 +19,12 @@ const TextArea: React.FC<TextAreaProps> = ({
           onChange={e => onChangeHandler('title', e.target.value)}
           value={task.title}
         />
-        <textarea
-          className="placeholder:text-[14px] bg-light-gray-2 resize-none
-          focus:outline-none h-[100px]"
-          name="task-description"
-          id="task-description"
-          placeholder="Description"
-          onChange={e => onChangeHandler('description', e.target.value)}
-          value={task.description || ''}
-        >
-        </textarea>
+        <ReactQuill
+          theme="snow"
+          placeholder="Desciption"
+          value={task.description}
+          onChange={value => onChangeHandler('description', value)}
+        />
       </div>
     </div>
   );

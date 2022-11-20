@@ -1,0 +1,27 @@
+.textarea .quill {
+  border: none;
+  width: 120%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 5px;
+}
+
+.textarea .quill .ql-toolbar {
+  border: none;
+  background: #d1d1d1;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.textarea .quill .ql-container {
+  border: none;
+}
+
+.textarea .quill .ql-editor {
+  border: none;
+  min-height: 100px;
+  background: #ededed;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

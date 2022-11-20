@@ -33,6 +33,7 @@ const TaskEdit: React.FC<TaskEditInterface> = ({
           task={data}
           onChangeHandler={onChangeHandler}
         />
+        
         <TaskActions
           onDeleteTask={onDeleteTask}
         />
