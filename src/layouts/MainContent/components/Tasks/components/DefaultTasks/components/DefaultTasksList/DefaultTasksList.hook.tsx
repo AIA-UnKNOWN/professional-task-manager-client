@@ -14,10 +14,13 @@ const useDefaultTasksList = props => {
     tasksList = tasksList.map(taskList => {
       return {
         ...taskList,
-        tasks: tasks.filter(task => {
-          const formattedTaskCreatedDate = formatDate(task.createdAt);
-          return taskList.date === formattedTaskCreatedDate;
-        })
+        tasks: sortTasks(
+          tasks.filter(task => {
+            const formattedTaskCreatedDate = formatDate(task.createdAt);
+            return taskList.date === formattedTaskCreatedDate;
+          }),
+          'desc'
+        ),
       }
     });
     setTasksList(
@@ -45,6 +48,14 @@ const useDefaultTasksList = props => {
       }
     }
     return tasksList;
+  }
+
+  const sortTasks = (tasksArray, order = 'asc') => {
+    const descSort = (task1, task2) => new Date(task2.createdAt).getTime() - new Date(task1.createdAt).getTime();
+    const ascSort = (task1, task2) => new Date(task1.createdAt).getTime() - new Date(task2.createdAt).getTime();
+    return order.toLowerCase() === 'desc'
+      ? tasksArray?.sort(descSort)
+      : tasksArray?.sort(ascSort);
   }
 
   const formatDate = (date: Date) : string => {

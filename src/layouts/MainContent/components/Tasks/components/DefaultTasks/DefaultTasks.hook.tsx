@@ -33,7 +33,7 @@ const useDefaultTasks = () => {
       if (project.id !== newTask.project_id) return project;
       return {
         ...project,
-        tasks: [ ...project.tasks, newTask ]
+        tasks: [ newTask, ...project.tasks ]
       };
     });
     dispatch(setProjects(updatedProjects));
