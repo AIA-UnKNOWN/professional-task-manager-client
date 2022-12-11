@@ -53,7 +53,10 @@ const useTask = (props: TaskProps) => {
     try {
       const response = await TaskActions.update(updatedTask.id, updatedTask);
       if (response.data !== "OK") return;
-      updateTasksRedux(updatedTask.id, updatedTask);
+      updateTasksRedux(
+        updatedTask.id,
+        updatedTask,
+      );
     } catch(error) {
       console.log('onSaveTaskError', error);
     }
@@ -68,6 +71,18 @@ const useTask = (props: TaskProps) => {
               return parseInt(task.id) !== id ?
                 task :
                 updatedTask;
+            }))
+          );
+          dispatch(
+            setProjects(projects.data.map(project => {
+              if (project.id !== updatedTask.project_id) return project;
+              return {
+                ...project,
+                tasks: project.tasks.map(task => {
+                  if (task.id !== updatedTask.id) return task;
+                  return updatedTask;
+                })
+              };
             }))
           );
         break;
