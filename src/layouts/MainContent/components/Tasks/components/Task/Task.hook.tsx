@@ -76,6 +76,15 @@ const useTask = (props: TaskProps) => {
           dispatch(
             setTasks(tasks.data.filter(task => parseInt(task.id) !== id))
           );
+          dispatch(
+            setProjects(projects.data.map(project => {
+              if (updatedTask.project_id !== project.id) return project;
+              return {
+                ...project,
+                tasks: project.tasks.filter(task => updatedTask.id !== task.id),
+              };
+            }))
+          );
         break;  
     }
   }
