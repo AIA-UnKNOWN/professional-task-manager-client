@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Swal from 'sweetalert2';
 
 const useDefaultTasksList = props => {
   const { tasks } = props;
@@ -88,6 +89,13 @@ const useDefaultTasksList = props => {
       }
     });
     navigator.clipboard.writeText(content);
+    Swal.fire({
+      position: 'bottom-end',
+      icon: 'success',
+      title: 'Copied to clipboard!',
+      showConfirmButton: false,
+      timer: 500
+    });
   }
 
   return {
