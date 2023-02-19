@@ -39,9 +39,7 @@ const useTask = (props: TaskProps) => {
       if (response.data !== "OK") return;
       setSaveButtonText('Saved!');
       updateProjectsRedux(task);
-      setTimeout(() => {
-        setIsEditMode(!isEditMode);
-      }, 200);
+      Swal.fire('Successfully saved!', undefined, 'success');
     } catch(error) {
       console.log('onSaveTaskError', error);
     }
