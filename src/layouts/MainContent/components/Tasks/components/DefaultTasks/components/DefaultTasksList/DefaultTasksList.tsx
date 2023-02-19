@@ -11,13 +11,17 @@ const DefaultTasksList: React.FC<PendingTasksListInterface> = props => {
     tasksList,
     // functions
     getDateToday,
+    copyTasksReport,
   } = useDefaultTasksList(props);
 
   return (
     <div className="mt-5">
       {tasksList.map((taskList, i) => (
         <React.Fragment key={i}>
-          <Timeline date={taskList.date === getDateToday() ? 'Today' : taskList.date} />
+          <Timeline
+            date={taskList.date === getDateToday() ? 'Today' : taskList.date}
+            onCopy={() => copyTasksReport(taskList)}
+          />
           {taskList.tasks.map(task => (
             <Task
               key={task.id}

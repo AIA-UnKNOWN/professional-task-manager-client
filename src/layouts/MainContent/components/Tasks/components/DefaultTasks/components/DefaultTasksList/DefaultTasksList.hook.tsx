@@ -72,11 +72,30 @@ const useDefaultTasksList = props => {
     return `${MONTH_NAMES[currentMonth]} ${currentDate}, ${currentYear}`;
   }
 
+  const copyTasksReport = (taskList) : void => {
+    const taskListDate = new Date(taskList.date);
+    const areCompletedTasks = taskList.tasks.every(task => task.is_completed);
+    let content = `[${areCompletedTasks ? 'Completed' : 'Work in progress'}]\n`;
+    content += `Updates ${taskListDate.getMonth()}/${taskListDate.getDate()}/${taskListDate.getFullYear()}:`;
+    taskList.tasks.forEach(task => {
+      content += `\n  - ${task.title}`;
+      const htmlTaskDescription = task.description;
+      if (htmlTaskDescription) {
+        const span = document.createElement('span');
+        span.innerHTML = htmlTaskDescription;
+        const spanSringContent = span.textContent || span.innerText;
+        content += `\n    "${spanSringContent}"`;
+      }
+    });
+    navigator.clipboard.writeText(content);
+  }
+
   return {
     // states
     tasksList,
     // functions
     getDateToday,
+    copyTasksReport,
   }
 }
 
