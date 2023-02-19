@@ -12,6 +12,7 @@ const LabelsList: React.FC = ({
     navigation,
     // reducers
     setNavigationById,
+    getAllTasksByLabelId,
   } = useLabelsList();
 
   if (!labels.length) return null;
@@ -23,7 +24,10 @@ const LabelsList: React.FC = ({
           <div
             className="label mb-1 last-of-type:mb-0 relative"
             key={label.id}
-            onClick={() => setNavigationById(label.id)}
+            onClick={() => {
+              setNavigationById(label.id);
+              getAllTasksByLabelId(label.id);
+            }}
           >
             <div
               className={`

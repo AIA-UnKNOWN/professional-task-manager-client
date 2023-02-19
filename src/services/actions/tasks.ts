@@ -35,6 +35,15 @@ const getAll = async (projectId: number): Promise<void> => {
   }
 }
 
+const getAllTasksByLabelId = async (labelId: number): Promise<void> => {
+  try {
+    const response = await axios.get(`${env.api.url}/label/${labelId}/tasks`);
+    return response.data;
+  } catch(error) {
+    console.log('GetAllTasksByLabelIdError', error);
+  }
+}
+
 const getAllSample = async (): Promise<Array<{ id: number, name: string }>> => {
   return [
     { id: 1, name: 'Label 1' },
@@ -56,6 +65,7 @@ export default {
   create,
   update,
   getAll,
+  getAllTasksByLabelId,
   getAllSample,
   deleteTask,
 }
