@@ -140,6 +140,10 @@ const useTask = (props: TaskProps) => {
         }),
       }
     })));
+    dispatch(setTasks(tasks.data.map(reduxTask => {
+      if (task.id !== reduxTask.id) return reduxTask;
+      return task;
+    })));
   }
 
   return {
