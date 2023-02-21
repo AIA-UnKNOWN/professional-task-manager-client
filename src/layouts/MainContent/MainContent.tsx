@@ -8,9 +8,11 @@ const MainContent: React.FC = () => {
   const [
     tasks,
     projects,
+    navigation,
   ] = useAppSelector(state => [
     state.tasks,
     state.projects,
+    state.navigation,
   ]);
 
   const currentProject = projects.data.find(p => p.id === tasks.projectId);
@@ -21,7 +23,7 @@ const MainContent: React.FC = () => {
         {currentProject && currentProject.name || 'No project title'}
       </p>
       <div>
-        {tasks.projectId ? (
+        {navigation.id && navigation.categoryName ? (
           <Tasks />
         ) : (
           <Container className="bg-light-gray-2 h-[200px] flex
