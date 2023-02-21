@@ -20,6 +20,8 @@ const LabelsList: React.FC = ({
   return (
     <div className="my-2">
       {labels.map(label => {
+        const pendingTasksCount = label.tasks?.filter(task => !task.is_completed)?.length || 0;
+
         return (
           <div
             className="label mb-1 last-of-type:mb-0 relative"
@@ -42,7 +44,7 @@ const LabelsList: React.FC = ({
                 {label.name}
               </span>
               <span className="font-bold">
-                0
+                {pendingTasksCount}
               </span>
             </div>
             <div
