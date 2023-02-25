@@ -17,10 +17,18 @@ const useTaskEdit = () => {
   const setTaskLabelByLabelId = async (labelId, task) => {
     const { status } = await TaskActions.update(task.id, { ...task, label_id: labelId });
     if (status !== 200) return;
+    updateReduxTasks(labelId, task);
+    updateReduxLabels(labelId, task);
+  }
+
+  const updateReduxTasks = (labelId, task) => {
     dispatch(setTasks(tasks.data.map(reduxTask => {
       if (reduxTask.id !== task.id) return reduxTask;
       return { ...reduxTask, label_id: labelId }
     })));
+  }
+
+  const updateReduxLabels = (labelId, task) => {
     dispatch(setLabels(labels.data.map(label => {
       if (label.id !== labelId) return label;
       const labelTaskIndex = label.tasks.findIndex(labelTask => labelTask.id === task.id);
