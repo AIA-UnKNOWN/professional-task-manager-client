@@ -46,7 +46,7 @@ const TaskModifierPanel: React.FC<TaskModifierPanelInterface> = ({
           className="text-[20px] mr-3 hover:bg-light-gray-3 p-2 rounded-full"
         >
           <ActionDropdown
-            displayedContentComponent={<FaFlag />}
+            displayedContentComponent={<FaTags />}
             dropdownComponentClassName="z-[1] top-[150%] min-w-max"
             dropdownComponent={
               <ul className='bg-light-gray rounded-md'>
@@ -68,11 +68,6 @@ const TaskModifierPanel: React.FC<TaskModifierPanelInterface> = ({
               </ul>
             }
           />
-        </button>
-        <button
-          className="text-[20px]"
-        >
-          <FaTags />
         </button>
       </div>
     </div>
