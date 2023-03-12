@@ -101,12 +101,13 @@ const useTask = (props: TaskProps) => {
               };
             }))
           );
+          const task = tasks.data.find(task => task.id === updatedTask.id);
           dispatch(
             setLabels(labels.data.map(label => {
-              if (label.id !== updatedTask.label_id) return label;
+              if (label.id !== task.label_id) return label;
               return {
                 ...label,
-                tasks: label.tasks.filter(task => task.id !== updatedTask.id),
+                tasks: label.tasks.filter(t => t.id !== task.id),
               }
             }))
           )
