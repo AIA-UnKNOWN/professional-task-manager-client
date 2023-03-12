@@ -3,10 +3,14 @@ import axios from 'axios';
 import env from '@env.js';
 import { TaskInterface } from '@layouts/MainContent/components/Tasks/components/Task/Task';
 
-const create = async (projectId: number): Promise<any> => {
+const create = async ({ projectId, labelId }: {
+  projectId: number | null,
+  labelId: number | null,
+}): Promise<any> => {
   try {
     const response = await axios.post(`${env.api.url}/task/create`, {
       project_id: projectId,
+      label_id: labelId,
       title: 'Untitled',
     });
     return response; 

@@ -1,5 +1,6 @@
 import { useAppSelector, useAppDispatch } from "@services/store";
 
+import navigationCategories from '@constants/navigation-categories';
 import TaskActions from "@services/actions/tasks";
 import { setTasks } from "@services/reducers/tasks";
 import { setProjects } from "@services/reducers/projects";
@@ -9,15 +10,26 @@ const useDefaultTasks = () => {
   const [
     tasks,
     projects,
+    navigation,
   ] = useAppSelector(state => [
     state.tasks,
     state.projects,
+    state.navigation,
   ]);
   const dispatch = useAppDispatch();
 
   const createTask = async (): Promise<void> => {
     try {
-      const response = await TaskActions.create(tasks.projectId);
+      const task = { projectId: null, labelId: null };
+      switch(navigation.categoryName) {
+        case "PROJECT":
+          task.projectId = navigation.id;
+          break;
+        case "LABEL":
+          task.labelId = navigation.id;
+          break;
+      }
+      const response = await TaskActions.create(task);
       if (response.status !== 201 || response.statusText !== 'Created') return;
       const newlyCreatedTask = response.data;
       appendNewTaskToRedux(newlyCreatedTask);
