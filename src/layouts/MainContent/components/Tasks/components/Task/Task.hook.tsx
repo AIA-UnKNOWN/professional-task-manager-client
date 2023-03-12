@@ -6,14 +6,17 @@ import { TaskProps, TaskInterface } from './Task';
 import TaskActions from '@services/actions/tasks';
 import { setTasks } from '@services/reducers/tasks';
 import { setProjects } from '@services/reducers/projects';
+import { setLabels } from '@services/reducers/labels';
 
 const useTask = (props: TaskProps) => {
   const [
     tasks,
     projects,
+    labels,
   ] = useAppSelector(state => [
     state.tasks,
     state.projects,
+    state.labels,
   ]);
   const dispatch = useAppDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
@@ -98,6 +101,15 @@ const useTask = (props: TaskProps) => {
               };
             }))
           );
+          dispatch(
+            setLabels(labels.data.map(label => {
+              if (label.id !== updatedTask.label_id) return label;
+              return {
+                ...label,
+                tasks: label.tasks.filter(task => task.id !== updatedTask.id),
+              }
+            }))
+          )
         break;  
     }
   }
