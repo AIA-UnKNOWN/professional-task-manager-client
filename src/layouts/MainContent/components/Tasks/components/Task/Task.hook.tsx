@@ -129,11 +129,6 @@ const useTask = (props: TaskProps) => {
           const response = await TaskActions.deleteTask(task.id);
           if (response.data !== "OK") return;
           updateTasksRedux(task.id, task, 'delete');
-          // Swal.fire(
-          //   'Deleted!',
-          //   'Task has been deleted.',
-          //   'success'
-          // )
           Swal.fire({
             position: 'center',
             icon: 'success',
