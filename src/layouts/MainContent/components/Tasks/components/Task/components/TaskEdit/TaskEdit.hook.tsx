@@ -29,16 +29,25 @@ const useTaskEdit = () => {
   }
 
   const updateReduxLabels = (labelId, task) => {
-    dispatch(setLabels(labels.data.map(label => {
+    task = tasks.data.find(t => t.id === task.id);
+    // Removes the task from previous label
+    let updatedLabels = labels.data.map(label => {
+      if (label.id !== task.label_id) return label;
+      return {
+        ...label,
+        tasks: label.tasks.filter(labelTask => labelTask.id !== task.id),
+      }
+    });
+    // Adds the task to the new assigned label
+    updatedLabels = updatedLabels.map(label => {
       if (label.id !== labelId) return label;
       const labelTaskIndex = label.tasks.findIndex(labelTask => labelTask.id === task.id);
       return {
         ...label,
-        tasks: labelTaskIndex === -1 ?
-          [...label.tasks, task]
-          : label.tasks,
+        tasks: labelTaskIndex === -1 ? [...label.tasks, task] : label.tasks,
       }
-    })));
+    });
+    dispatch(setLabels(updatedLabels));
   }
 
   return {
