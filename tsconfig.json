@@ -15,7 +15,8 @@
       "@env.js": ["../env.js"],
       "@common/*": ["common/*"],
       "@layouts/*": ["layouts/*"],
-      "@services/*": ["services/*"]
+      "@services/*": ["services/*"],
+      "@constants/*": ["constants/*"],
     }
   },
   "include": ["src"]
