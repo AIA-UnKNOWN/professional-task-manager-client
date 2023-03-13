@@ -18,6 +18,7 @@ const useTaskEdit = () => {
   ]);
 
   const setTaskLabelByLabelId = async (labelId, task) => {
+    task = tasks.data.find(t => t.id === task.id);
     const { status } = await TaskActions.update(task.id, { ...task, label_id: labelId });
     if (status !== 200) return;
     updateReduxTasks({ labelId }, task);
@@ -25,6 +26,7 @@ const useTaskEdit = () => {
   }
 
   const setTaskProjectByProjectId = async (projectId, task) => {
+    task = tasks.data.find(t => t.id === task.id);
     const { status } = await TaskActions.update(task.id, { ...task, project_id: projectId });
     if (status !== 200) return;
     updateReduxTasks({ projectId }, task);
