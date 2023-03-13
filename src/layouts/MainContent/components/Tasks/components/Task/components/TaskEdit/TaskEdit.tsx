@@ -19,6 +19,7 @@ const TaskEdit: React.FC<TaskEditInterface> = ({
   } = data;
   const {
     setTaskLabelByLabelId,
+    setTaskProjectByProjectId,
   } = useTaskEdit();
 
   return (
@@ -44,6 +45,7 @@ const TaskEdit: React.FC<TaskEditInterface> = ({
         onCancel={onCancelTask}
         onSave={onSaveTask}
         setTaskLabelByLabelId={labelId => setTaskLabelByLabelId(labelId, data)}
+        setTaskProjectByProjectId={projectId =>setTaskProjectByProjectId(projectId, data)}
       />
     </div>
   );
