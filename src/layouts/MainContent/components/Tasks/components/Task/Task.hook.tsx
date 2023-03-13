@@ -42,7 +42,13 @@ const useTask = (props: TaskProps) => {
       if (response.data !== "OK") return;
       setSaveButtonText('Saved!');
       updateProjectsRedux(task);
-      Swal.fire('Successfully saved!', undefined, 'success');
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Successfully saved!',
+        showConfirmButton: false,
+        timer: 1000
+      });      
     } catch(error) {
       console.log('onSaveTaskError', error);
     }
