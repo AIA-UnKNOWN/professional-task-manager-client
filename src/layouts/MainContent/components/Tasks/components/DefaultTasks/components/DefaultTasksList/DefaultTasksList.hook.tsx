@@ -17,7 +17,10 @@ const useDefaultTasksList = props => {
         ...taskList,
         tasks: sortTasks(
           tasks.filter(task => {
-            const formattedTaskCreatedDate = formatDate(task.createdAt);
+            const areCompletedTasks = tasks.every(task => task.is_completed);
+            const formattedTaskCreatedDate = formatDate(
+              areCompletedTasks ? task.updatedAt : task.createdAt
+            );
             return taskList.date === formattedTaskCreatedDate;
           }),
           'desc'
@@ -33,9 +36,12 @@ const useDefaultTasksList = props => {
 
   const organizeTasksList = () => {
     let tasksList = [];
+    const areCompletedTasks = tasks.every(task => task.is_completed);
     for (const task of tasks) {
       // formats the created date of a task into human readable format
-      const formattedTaskCreatedDate = formatDate(task.createdAt);
+      const formattedTaskCreatedDate = formatDate(
+        areCompletedTasks ? task.updatedAt : task.createdAt
+      );
       // gets all the task created dates to be used in checking for duplicate dates
       // which will be used in grouping tasks by created date
       const tasksListDates = tasksList.map(taskList => taskList.date);
