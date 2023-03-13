@@ -18,7 +18,18 @@ const ProjectsList: React.FC<ProjectsListInterface> = ({
     setNavigationById,
   } = useProjectsList();
 
-  if (projects && projects.length === 0) return null;
+  if (projects && projects.length === 0) return (
+    <div className='project mb-1 relative'>
+      <div
+        className={`
+          rounded-[10px] text-[15px] w-[211px] h-[34px] flex justify-center
+          items-center px-4 bg-light-gray
+        `}
+      >
+          <span>No projects</span>
+      </div>
+    </div>
+  );
 
   return (
     <div className="my-2">

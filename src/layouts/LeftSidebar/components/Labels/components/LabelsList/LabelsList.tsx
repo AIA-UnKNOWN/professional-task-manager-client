@@ -15,7 +15,18 @@ const LabelsList: React.FC = ({
     getAllTasksByLabelId,
   } = useLabelsList();
 
-  if (!labels.length) return null;
+  if (!labels.length) return (
+    <div className='project mb-1 relative'>
+      <div
+        className={`
+          rounded-[10px] text-[15px] w-[211px] h-[34px] flex justify-center
+          items-center px-4 bg-light-gray
+        `}
+      >
+          <span>No labels</span>
+      </div>
+    </div>
+  );
 
   return (
     <div className="my-2">
