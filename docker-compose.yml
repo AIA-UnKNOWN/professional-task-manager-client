@@ -1,8 +1,12 @@
 services:
   professional-task-manager-client:
-    image: professional-task-manager-client-image
+    image: node:16
     container_name: task-manager-client
+    working_dir: /app
+    command: sh -c 'npm install && npm run dev'
     ports:
       - 9000:9000
     volumes:
       - ./:/app
+    environment:
+      API_URL: "http://localhost:8888"

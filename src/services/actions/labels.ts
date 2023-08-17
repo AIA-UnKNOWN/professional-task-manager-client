@@ -1,45 +1,48 @@
-import axios from 'axios';
-
-import env from '@env.js';
+import axios from "axios";
 
 const getAll = async (): Promise<void> => {
   try {
-    const response = await axios.get(`${env.api.url}/labels`);
+    const response = await axios.get(`${process.env.API_URL}/labels`);
     return response.data;
-  } catch(error) {
-    console.log('GetAllProjectsError', error);
+  } catch (error) {
+    console.log("GetAllProjectsError", error);
   }
-}
+};
 
-const create = async (label) : Promise<any> => {
+const create = async (label): Promise<any> => {
   try {
-    const response = await axios.post(`${env.api.url}/label/create`, label);
+    const response = await axios.post(
+      `${process.env.API_URL}/label/create`,
+      label
+    );
     return response;
-  } catch(error) {
-    console.log('CreateProjectError', error);
+  } catch (error) {
+    console.log("CreateProjectError", error);
   }
-}
+};
 
-const deleteLabel = async (labelId: number) : Promise<any> => {
+const deleteLabel = async (labelId: number): Promise<any> => {
   try {
-    const response = await axios.delete(`${env.api.url}/label/${labelId}/delete`);
+    const response = await axios.delete(
+      `${process.env.API_URL}/label/${labelId}/delete`
+    );
     return response;
-  } catch(error) {
-    console.log('DeleteProjectError', error);
+  } catch (error) {
+    console.log("DeleteProjectError", error);
   }
-}
+};
 
-const getAllSample = async (): Promise<Array<{ id: number, name: string }>> => {
+const getAllSample = async (): Promise<Array<{ id: number; name: string }>> => {
   return [
-    { id: 1, name: 'Label 1' },
-    { id: 2, name: 'Label 2' },
-    { id: 3, name: 'Label 3' },
-  ]
-}
+    { id: 1, name: "Label 1" },
+    { id: 2, name: "Label 2" },
+    { id: 3, name: "Label 3" },
+  ];
+};
 
 export default {
   getAll,
   getAllSample,
   create,
   deleteLabel,
-}
+};
